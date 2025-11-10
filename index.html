@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bryce Cohen's Portfolio</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use Inter font -->
-    <style>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font --><style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            /* Pale, soft blue-green background for maximum readability (easy on eyes) */
-            background-color: #f7fbf8; 
+            /* Changed to a very light, neutral grey background */
+            background-color: #f5f5f5; 
         }
         /* Custom styling for embedded media aspect ratio */
         .video-container {
@@ -34,19 +32,16 @@
             box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.05), 0 8px 15px -8px rgba(0, 0, 0, 0.03);
         }
     </style>
-    <!-- Lucide Icons for aesthetic appeal -->
-    <script type="module">
+    <!-- Lucide Icons for aesthetic appeal --><script type="module">
         import { createIcons, Twitter, Link, FileText, Video, ImageIcon, BookOpen } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
         createIcons({ icons: { Twitter, Link, FileText, Video, ImageIcon, BookOpen } });
     </script>
 </head>
 <body class="text-gray-800">
 
-    <!-- Header & Navigation (Fixed top for instant branding) -->
-    <header class="bg-white card-shadow-professional sticky top-0 z-20 border-b-4 border-amber-500">
+    <!-- Header & Navigation (Fixed top for instant branding) --><header class="bg-white card-shadow-professional sticky top-0 z-20 border-b-4 border-amber-500">
         <div class="container mx-auto p-4 flex justify-between items-center max-w-7xl">
-            <!-- Strong, deep primary color for branding -->
-            <h1 class="text-2xl font-extrabold text-blue-900">Bryce Cohen | Media</h1>
+            <!-- Strong, deep primary color for branding --><h1 class="text-2xl font-extrabold text-blue-900">Bryce Cohen | Media</h1>
             <nav class="space-x-6">
                 <a href="#article-screenshots" class="text-gray-700 font-medium hover:text-amber-500 transition duration-300 hidden sm:inline-block">Articles</a>
                 <a href="#video-content" class="text-gray-700 font-medium hover:text-amber-500 transition duration-300 hidden sm:inline-block">Video</a>
@@ -55,8 +50,7 @@
         </div>
     </header>
 
-    <!-- Hero Section / Introduction (High contrast, centered, authoritative) -->
-    <main class="container mx-auto p-4 md:p-8 max-w-7xl">
+    <!-- Hero Section / Introduction (High contrast, centered, authoritative) --><main class="container mx-auto p-4 md:p-8 max-w-7xl">
         <section class="text-center py-20 bg-white rounded-2xl shadow-2xl card-shadow-professional mb-16 border-b-8 border-blue-900/5">
             <h2 class="text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">Bryce Cohen's Portfolio</h2>
             <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed border-t-2 border-amber-300 pt-6 mt-6">
@@ -64,31 +58,26 @@
             </p>
         </section>
 
-        <!-- Professional Links Section (Anchored by strong color and hover) -->
-        <section id="contact-resume" class="grid md:grid-cols-2 gap-10 mb-16">
-            <!-- LinkedIn Card (Primary Authority Button) -->
-            <div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional border-l-4 border-amber-500 hover:shadow-2xl transition duration-300 transform hover:translate-y-[-2px]">
+        <!-- Professional Links Section (Anchored by strong color and hover) --><section id="contact-resume" class="grid md:grid-cols-2 gap-10 mb-16">
+            <!-- LinkedIn Card (Primary Authority Button) --><div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional border-l-4 border-amber-500 hover:shadow-2xl transition duration-300 transform hover:translate-y-[-2px]">
                 <div class="flex items-center space-x-4 mb-4">
                     <i data-lucide="link" class="w-7 h-7 text-blue-800"></i>
                     <h3 class="text-2xl font-bold text-gray-900">Connect with me!</h3>
                 </div>
                 <p class="text-gray-600 mb-6">Send me a connection request on LinkedIn. to view my full professional history and endorsements.</p>
-                <!-- Button Link to LinkedIn (Primary, Authoritative Blue) -->
-                <a href="https://www.linkedin.com/in/bryce-cohen1/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-3 border border-transparent text-base font-semibold rounded-xl shadow-lg text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-amber-500 transition duration-200">
+                <!-- Button Link to LinkedIn (Primary, Authoritative Blue) --><a href="https://www.linkedin.com/in/bryce-cohen1/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-3 border border-transparent text-base font-semibold rounded-xl shadow-lg text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-amber-500 transition duration-200">
                     <i data-lucide="link" class="w-5 h-5 mr-3"></i>
                     View LinkedIn Profile
                 </a>
             </div>
 
-            <!-- Resume Card (Secondary, Downloadable Action) -->
-            <div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional border-l-4 border-amber-500 hover:shadow-2xl transition duration-300 transform hover:translate-y-[-2px]">
+            <!-- Resume Card (Secondary, Downloadable Action) --><div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional border-l-4 border-amber-500 hover:shadow-2xl transition duration-300 transform hover:translate-y-[-2px]">
                 <div class="flex items-center space-x-4 mb-4">
                     <i data-lucide="file-text" class="w-7 h-7 text-blue-800"></i>
                     <h3 class="text-2xl font-bold text-gray-900">My Resume (PDF)</h3>
                 </div>
                 <p class="text-gray-600 mb-6">Click here to review my resume.</p>
-                <!-- Button Link to PDF Resume (Secondary, Clear CTA) -->
-                <a href="/assets/my_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-3 border border-2 border-blue-200 text-base font-semibold rounded-xl shadow-md text-blue-800 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-amber-500 transition duration-200">
+                <!-- Button Link to PDF Resume (Secondary, Clear CTA) --><a href="/assets/my_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-3 border border-2 border-blue-200 text-base font-semibold rounded-xl shadow-md text-blue-800 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-amber-500 transition duration-200">
                     <i data-lucide="file-text" class="w-5 h-5 mr-3"></i>
                     Download Resume
                 </a>
@@ -98,57 +87,49 @@
             </div>
         </section>
 
-        <!-- NEW SECTION: Featured Article Screenshots (Large, high-impact visuals) -->
-        <section id="article-screenshots" class="mb-16">
+        <!-- NEW SECTION: Featured Article Screenshots (Large, high-impact visuals) --><section id="article-screenshots" class="mb-16">
             <h2 class="text-4xl font-extrabold text-gray-900 mb-8 flex items-center pb-3 border-b border-amber-300">
                 <i data-lucide="book-open" class="w-9 h-9 mr-3 text-amber-500"></i>
                 Featured Print & Digital Articles (6 Slots)
             </h2>
 
-            <!-- Article Screenshot Gallery: Two columns for large visual emphasis -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Article 1 -->
-                <div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+            <!-- Article Screenshot Gallery: Two columns for large visual emphasis --><div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Article 1 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
                     <img src="https://placehold.co/800x600/3b82f6/ffffff?text=Article+Screenshot+1" alt="Screenshot of The Daily Athenaeum Article 1" class="w-full h-auto object-cover border-b-2 border-blue-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-900">Title of Article 1</p>
                         <span class="text-sm text-blue-500 font-medium">The Daily Athenaeum | Sports Managing Editor</span>
                     </div>
                 </div>
-                <!-- Article 2 -->
-                <div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                <!-- Article 2 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
                     <img src="https://placehold.co/800x600/10b981/ffffff?text=Article+Screenshot+2" alt="Screenshot of The Daily Athenaeum Article 2" class="w-full h-auto object-cover border-b-2 border-blue-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-900">Title of Article 2</p>
                         <span class="text-sm text-emerald-500 font-medium">Digital Publication | Investigative Piece</span>
                     </div>
                 </div>
-                <!-- Article 3 -->
-                <div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                <!-- Article 3 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
                     <img src="https://placehold.co/800x600/f97316/ffffff?text=Article+Screenshot+3" alt="Screenshot of Article 3" class="w-full h-auto object-cover border-b-2 border-blue-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-900">Title of Article 3</p>
                         <span class="text-sm text-orange-500 font-medium">WVU Coursework | Feature Writing</span>
                     </div>
                 </div>
-                 <!-- Article 4 -->
-                 <div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                 <!-- Article 4 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
                     <img src="https://placehold.co/800x600/6366f1/ffffff?text=Article+Screenshot+4" alt="Screenshot of Article 4" class="w-full h-auto object-cover border-b-2 border-blue-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-900">Title of Article 4</p>
                         <span class="text-sm text-indigo-500 font-medium">External Blog | Sports Analysis</span>
                     </div>
                 </div>
-                 <!-- Article 5 -->
-                 <div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                 <!-- Article 5 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
                     <img src="https://placehold.co/800x600/dc2626/ffffff?text=Article+Screenshot+5" alt="Screenshot of Article 5" class="w-full h-auto object-cover border-b-2 border-blue-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-900">Title of Article 5</p>
                         <span class="text-sm text-red-600 font-medium">School Project | Design & Layout</span>
                     </div>
                 </div>
-                 <!-- Article 6 -->
-                 <div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                 <!-- Article 6 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
                     <img src="https://placehold.co/800x600/0d9488/ffffff?text=Article+Screenshot+6" alt="Screenshot of Article 6" class="w-full h-auto object-cover border-b-2 border-blue-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-900">Title of Article 6</p>
@@ -159,19 +140,16 @@
         </section>
 
 
-        <!-- Video Content Section (6 Slots in a 3-column grid) -->
-        <section id="video-content" class="mb-16">
+        <!-- Video Content Section (6 Slots in a 3-column grid) --><section id="video-content" class="mb-16">
             <h2 class="text-4xl font-extrabold text-gray-900 mb-8 flex items-center pb-3 border-b border-amber-300">
                 <i data-lucide="video" class="w-9 h-9 mr-3 text-amber-500"></i>
                 Jomboy Media social content & TV broadcast coursework (6 Slots)
             </h2>
 
-            <!-- Video Embeds Container (Modern 3-column grid layout for desktop) -->
-            <div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional">
+            <!-- Video Embeds Container (Modern 3-column grid layout for desktop) --><div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional">
                 <h3 class="text-2xl font-bold mb-6 text-blue-800">Featured Video Content</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Video 1 (Jomboy Reel) -->
-                    <div class="video-container shadow-lg hover:shadow-xl transition duration-300">
+                    <!-- Video 1 (Jomboy Reel) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
                         <iframe
                             src="https://www.youtube.com/embed/oPdGNv1gps8"
                             title="Jomboy Media social content reel"
@@ -180,8 +158,7 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <!-- Video 2 (Broadcast Coursework) -->
-                    <div class="video-container shadow-lg hover:shadow-xl transition duration-300">
+                    <!-- Video 2 (Broadcast Coursework) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
                         <iframe
                             src="https://www.youtube.com/embed/i-MGt-_Rr78"
                             title="TV broadcast coursework"
@@ -190,8 +167,7 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <!-- Video 3 (Placeholder - Update the embed link) -->
-                    <div class="video-container shadow-lg hover:shadow-xl transition duration-300">
+                    <!-- Video 3 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
                         <iframe
                             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                             title="Video Placeholder 3"
@@ -200,8 +176,7 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <!-- Video 4 (Placeholder - Update the embed link) -->
-                    <div class="video-container shadow-lg hover:shadow-xl transition duration-300">
+                    <!-- Video 4 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
                         <iframe
                             src="https://www.youtube.com/embed/oHg5SJYRHA0"
                             title="Video Placeholder 4"
@@ -210,8 +185,7 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <!-- Video 5 (Placeholder - Update the embed link) -->
-                    <div class="video-container shadow-lg hover:shadow-xl transition duration-300">
+                    <!-- Video 5 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
                         <iframe
                             src="https://www.youtube.com/embed/7Qx8j7oD-qg"
                             title="Video Placeholder 5"
@@ -220,8 +194,7 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <!-- Video 6 (Placeholder - Update the embed link) -->
-                    <div class="video-container shadow-lg hover:shadow-xl transition duration-300">
+                    <!-- Video 6 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
                         <iframe
                             src="https://www.youtube.com/embed/8eW_YQ-b8_s"
                             title="Video Placeholder 6"
@@ -234,8 +207,7 @@
             </div>
         </section>
 
-        <!-- Social Media Section (5 Tweet Spots) -->
-        <section id="social-posts" class="mb-16">
+        <!-- Social Media Section (5 Tweet Spots) --><section id="social-posts" class="mb-16">
             <h2 class="text-4xl font-extrabold text-gray-900 mb-8 flex items-center pb-3 border-b border-amber-300">
                 <i data-lucide="twitter" class="w-9 h-9 mr-3 text-amber-500"></i>
                 Key Social Media Mentions (5 Slots)
@@ -244,8 +216,7 @@
             <div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional">
                 <h3 class="text-2xl font-bold mb-6 text-blue-800">Recent Hyperlinked Posts</h3>
                 <div class="space-y-6 grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-                    <!-- Tweet 1 Placeholder -->
-                    <div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
+                    <!-- Tweet 1 Placeholder --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
                         <a href="https://twitter.com/user/status/1234567890" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
                             <p class="text-gray-900 font-semibold mb-1">
                                 Check out my thread on the new digital marketing trends! It's shaping up to be a fascinating year. 
@@ -254,8 +225,7 @@
                             <span class="text-sm text-gray-500">@MediaUser | Oct 2025</span>
                         </a>
                     </div>
-                    <!-- Tweet 2 Placeholder -->
-                    <div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
+                    <!-- Tweet 2 Placeholder --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
                         <a href="https://twitter.com/user/status/9876543210" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
                             <p class="text-gray-900 font-semibold mb-1">
                                 Had a great time covering the community event this weekend. Photos and video coming soon! 
@@ -264,8 +234,7 @@
                             <span class="text-sm text-gray-500">@MediaUser | Sep 2025</span>
                         </a>
                     </div>
-                    <!-- Tweet 3 Placeholder (New) -->
-                    <div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
+                    <!-- Tweet 3 Placeholder (New) --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
                         <a href="https://twitter.com/user/status/1112223330" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
                             <p class="text-gray-900 font-semibold mb-1">
                                 My latest story for The Daily Athenaeum is live! Read about the incredible season opener for WVU Football. 
@@ -274,8 +243,7 @@
                             <span class="text-sm text-gray-500">@BryceCohen | Aug 2025</span>
                         </a>
                     </div>
-                    <!-- Tweet 4 Placeholder (New) -->
-                    <div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
+                    <!-- Tweet 4 Placeholder (New) --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
                         <a href="https://twitter.com/user/status/4445556660" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
                             <p class="text-gray-900 font-semibold mb-1">
                                 Loved working on this production piece for Jomboy Media. Check out the final cut! 
@@ -284,8 +252,7 @@
                             <span class="text-sm text-gray-500">@JomboyMedia | July 2025</span>
                         </a>
                     </div>
-                    <!-- Tweet 5 Placeholder (New) -->
-                    <div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
+                    <!-- Tweet 5 Placeholder (New) --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
                         <a href="https://twitter.com/user/status/7778889990" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
                             <p class="text-gray-900 font-semibold mb-1">
                                 Great discussion today on sports ethics in my media class. Highly recommend this book: [Link to Book].
@@ -299,8 +266,7 @@
         </section>
     </main>
 
-    <!-- Footer (Strong, authoritative end) -->
-    <footer class="bg-blue-900 text-white p-8 mt-16">
+    <!-- Footer (Strong, authoritative end) --><footer class="bg-blue-900 text-white p-8 mt-16">
         <div class="container mx-auto text-center max-w-7xl">
             <p class="text-sm">&copy; 2025 Bryce Cohen Media Portfolio. All rights reserved.</p>
         </div>
