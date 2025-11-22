@@ -3,274 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bryce Cohen's Portfolio</title>
-    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use Inter font --><style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    <title>Bryce Cohen | Media Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#0f172a',
+                        'brand-indigo': '#6366f1',
+                        'brand-coral': '#f472b6',
+                        'brand-glass': 'rgba(255, 255, 255, 0.7)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
         body {
             font-family: 'Inter', sans-serif;
-            /* Changed to a very light, neutral grey background */
-            background-color: #f5f5f5; 
+            background: #f8fafc;
+            /* subtle animated background mesh */
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            min-height: 100vh;
         }
-        /* Custom styling for embedded media aspect ratio */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
+
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 0.75rem; /* rounded-xl */
+
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.85); /* Dark glass for nav */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        /* Custom shadow for a professional, "floating" look */
-        .card-shadow-professional {
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.05), 0 8px 15px -8px rgba(0, 0, 0, 0.03);
+
+        /* Hide scrollbar for clean look but allow scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Vertical Video Ratio */
+        .aspect-9-16 {
+            aspect-ratio: 9 / 16;
         }
     </style>
-    <!-- Lucide Icons for aesthetic appeal --><script type="module">
-        import { createIcons, Twitter, Link, FileText, Video, ImageIcon, BookOpen } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
-        createIcons({ icons: { Twitter, Link, FileText, Video, ImageIcon, BookOpen } });
+    <!-- Lucide Icons -->
+    <script type="module">
+        import { createIcons, Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
+        
+        // Initialize icons after DOM load
+        window.addEventListener('DOMContentLoaded', () => {
+            createIcons({ icons: { Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink } });
+        });
+        
+        // Expose navigation function globally
+        window.navigateTo = (pageId) => {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('animate-fade-in');
+            });
+            
+            // Show target page
+            const target = document.getElementById(pageId);
+            target.classList.remove('hidden');
+            target.classList.add('animate-fade-in');
+            
+            // Update nav state
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('text-brand-coral', 'font-bold');
+                el.classList.add('text-gray-300');
+            });
+            document.getElementById(`nav-${pageId}`).classList.add('text-brand-coral', 'font-bold');
+            document.getElementById(`nav-${pageId}`).classList.remove('text-gray-300');
+
+            // Scroll to top
+            window.scrollTo(0,0);
+        };
     </script>
 </head>
-<body class="text-gray-800">
+<body class="text-slate-800 selection:bg-brand-coral selection:text-white">
 
-    <!-- Header & Navigation (Fixed top for instant branding) --><header class="bg-white card-shadow-professional sticky top-0 z-20 border-b-4 border-amber-500">
-        <div class="container mx-auto p-4 flex justify-between items-center max-w-7xl">
-            <!-- Strong, deep primary color for branding --><h1 class="text-2xl font-extrabold text-blue-900">Bryce Cohen | Media</h1>
-            <nav class="space-x-6">
-                <a href="#article-screenshots" class="text-gray-700 font-medium hover:text-amber-500 transition duration-300 hidden sm:inline-block">Articles</a>
-                <a href="#video-content" class="text-gray-700 font-medium hover:text-amber-500 transition duration-300 hidden sm:inline-block">Video</a>
-                <a href="#contact-resume" class="text-gray-700 font-medium hover:text-amber-500 transition duration-300 hidden sm:inline-block">Experience</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section / Introduction (High contrast, centered, authoritative) --><main class="container mx-auto p-4 md:p-8 max-w-7xl">
-        <section class="text-center py-20 bg-white rounded-2xl shadow-2xl card-shadow-professional mb-16 border-b-8 border-blue-900/5">
-            <h2 class="text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">Bryce Cohen's Portfolio</h2>
-            <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed border-t-2 border-amber-300 pt-6 mt-6">
-                Hello, my name is Bryce Cohen. I am a junior sports media student at West Virginia University. I am the sports managing editor of The Daily Athenaeum and a production intern for Jomboy Media. My experience lies in writing, video producing and broadcasting.
-            </p>
-        </section>
-
-        <!-- Professional Links Section (Anchored by strong color and hover) --><section id="contact-resume" class="grid md:grid-cols-2 gap-10 mb-16">
-            <!-- LinkedIn Card (Primary Authority Button) --><div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional border-l-4 border-amber-500 hover:shadow-2xl transition duration-300 transform hover:translate-y-[-2px]">
-                <div class="flex items-center space-x-4 mb-4">
-                    <i data-lucide="link" class="w-7 h-7 text-blue-800"></i>
-                    <h3 class="text-2xl font-bold text-gray-900">Connect with me!</h3>
-                </div>
-                <p class="text-gray-600 mb-6">Send me a connection request on LinkedIn. to view my full professional history and endorsements.</p>
-                <!-- Button Link to LinkedIn (Primary, Authoritative Blue) --><a href="https://www.linkedin.com/in/bryce-cohen1/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-3 border border-transparent text-base font-semibold rounded-xl shadow-lg text-white bg-blue-800 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-amber-500 transition duration-200">
-                    <i data-lucide="link" class="w-5 h-5 mr-3"></i>
-                    View LinkedIn Profile
-                </a>
+    <!-- Sticky Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-8 h-8 bg-gradient-to-br from-brand-indigo to-brand-coral rounded-lg flex items-center justify-center text-white font-bold text-lg">B</div>
+                <span class="text-xl font-bold text-white tracking-tight">Bryce<span class="text-brand-coral">Cohen</span></span>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <button id="nav-home" onclick="navigateTo('home')" class="nav-link text-brand-coral font-bold hover:text-white transition-colors flex items-center gap-2">
+                    <i data-lucide="home" class="w-4 h-4"></i> Home
+                </button>
+                <button id="nav-experience" onclick="navigateTo('experience')" class="nav-link text-gray-300 hover:text-white transition-colors flex items-center gap-2">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i> Experience
+                </button>
+                <button id="nav-about" onclick="navigateTo('about')" class="nav-link text-gray-300 hover:text-white transition-colors flex items-center gap-2">
+                    <i data-lucide="user" class="w-4 h-4"></i> About Me
+                </button>
             </div>
 
-            <!-- Resume Card (Secondary, Downloadable Action) --><div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional border-l-4 border-amber-500 hover:shadow-2xl transition duration-300 transform hover:translate-y-[-2px]">
-                <div class="flex items-center space-x-4 mb-4">
-                    <i data-lucide="file-text" class="w-7 h-7 text-blue-800"></i>
-                    <h3 class="text-2xl font-bold text-gray-900">My Resume (PDF)</h3>
-                </div>
-                <p class="text-gray-600 mb-6">Click here to review my resume.</p>
-                <!-- Button Link to PDF Resume (Secondary, Clear CTA) --><a href="/assets/my_resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-3 border border-2 border-blue-200 text-base font-semibold rounded-xl shadow-md text-blue-800 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-amber-500 transition duration-200">
-                    <i data-lucide="file-text" class="w-5 h-5 mr-3"></i>
-                    Download Resume
-                </a>
-                <p class="text-xs text-gray-400 mt-3 text-center">
-                    (Placeholder URL: Upload your PDF and update the 'href'.)
+            <!-- Mobile Menu Button (Simplified for layout) -->
+            <button class="md:hidden text-white" onclick="navigateTo('experience')">
+                <i data-lucide="briefcase" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTENT CONTAINER -->
+    <div class="pt-24 min-h-screen">
+
+        <!-- ================= HOME PAGE ================= -->
+        <div id="home" class="page-section container mx-auto px-4 flex flex-col items-center justify-center min-h-[85vh] text-center">
+            <div class="animate-slide-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-indigo/20 text-brand-indigo border border-brand-indigo/30 text-sm font-semibold mb-6 backdrop-blur-sm bg-white/10 text-white">
+                    Multimedia Specialist & Editor
+                </span>
+                <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter mb-6 drop-shadow-2xl">
+                    Create. <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-coral to-brand-indigo">Captivate.</span> Connect.
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Welcome to the portfolio of Bryce Cohen. Journalism, video production, and digital storytelling at the intersection of sports and culture.
                 </p>
-            </div>
-        </section>
-
-        <!-- NEW SECTION: Featured Article Screenshots (Large, high-impact visuals) --><section id="article-screenshots" class="mb-16">
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 flex items-center pb-3 border-b border-amber-300">
-                <i data-lucide="book-open" class="w-9 h-9 mr-3 text-amber-500"></i>
-                Featured Print & Digital Articles (6 Slots)
-            </h2>
-
-            <!-- Article Screenshot Gallery: Two columns for large visual emphasis --><div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Article 1 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
-                    <img src="https://placehold.co/800x600/3b82f6/ffffff?text=Article+Screenshot+1" alt="Screenshot of The Daily Athenaeum Article 1" class="w-full h-auto object-cover border-b-2 border-blue-200">
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-900">Title of Article 1</p>
-                        <span class="text-sm text-blue-500 font-medium">The Daily Athenaeum | Sports Managing Editor</span>
-                    </div>
-                </div>
-                <!-- Article 2 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
-                    <img src="https://placehold.co/800x600/10b981/ffffff?text=Article+Screenshot+2" alt="Screenshot of The Daily Athenaeum Article 2" class="w-full h-auto object-cover border-b-2 border-blue-200">
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-900">Title of Article 2</p>
-                        <span class="text-sm text-emerald-500 font-medium">Digital Publication | Investigative Piece</span>
-                    </div>
-                </div>
-                <!-- Article 3 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
-                    <img src="https://placehold.co/800x600/f97316/ffffff?text=Article+Screenshot+3" alt="Screenshot of Article 3" class="w-full h-auto object-cover border-b-2 border-blue-200">
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-900">Title of Article 3</p>
-                        <span class="text-sm text-orange-500 font-medium">WVU Coursework | Feature Writing</span>
-                    </div>
-                </div>
-                 <!-- Article 4 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
-                    <img src="https://placehold.co/800x600/6366f1/ffffff?text=Article+Screenshot+4" alt="Screenshot of Article 4" class="w-full h-auto object-cover border-b-2 border-blue-200">
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-900">Title of Article 4</p>
-                        <span class="text-sm text-indigo-500 font-medium">External Blog | Sports Analysis</span>
-                    </div>
-                </div>
-                 <!-- Article 5 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
-                    <img src="https://placehold.co/800x600/dc2626/ffffff?text=Article+Screenshot+5" alt="Screenshot of Article 5" class="w-full h-auto object-cover border-b-2 border-blue-200">
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-900">Title of Article 5</p>
-                        <span class="text-sm text-red-600 font-medium">School Project | Design & Layout</span>
-                    </div>
-                </div>
-                 <!-- Article 6 --><div class="bg-white rounded-xl shadow-xl card-shadow-professional overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
-                    <img src="https://placehold.co/800x600/0d9488/ffffff?text=Article+Screenshot+6" alt="Screenshot of Article 6" class="w-full h-auto object-cover border-b-2 border-blue-200">
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-900">Title of Article 6</p>
-                        <span class="text-sm text-teal-600 font-medium">The Daily Athenaeum | Breaking News</span>
-                    </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="navigateTo('experience')" class="group relative px-8 py-4 bg-white text-brand-dark font-bold rounded-full text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(244,114,182,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2">Explore Work <i data-lucide="arrow-right" class="w-5 h-5"></i></span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-brand-coral to-brand-indigo opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                    </button>
+                    <button onclick="navigateTo('about')" class="px-8 py-4 glass-panel text-brand-dark font-bold rounded-full text-lg hover:bg-white transition-all transform hover:-translate-y-1">
+                        Meet Bryce
+                    </button>
                 </div>
             </div>
-        </section>
-
-
-        <!-- Video Content Section (6 Slots in a 3-column grid) --><section id="video-content" class="mb-16">
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 flex items-center pb-3 border-b border-amber-300">
-                <i data-lucide="video" class="w-9 h-9 mr-3 text-amber-500"></i>
-                Jomboy Media social content & TV broadcast coursework (6 Slots)
-            </h2>
-
-            <!-- Video Embeds Container (Modern 3-column grid layout for desktop) --><div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional">
-                <h3 class="text-2xl font-bold mb-6 text-blue-800">Featured Video Content</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Video 1 (Jomboy Reel) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
-                        <iframe
-                            src="https://www.youtube.com/embed/oPdGNv1gps8"
-                            title="Jomboy Media social content reel"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <!-- Video 2 (Broadcast Coursework) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
-                        <iframe
-                            src="https://www.youtube.com/embed/i-MGt-_Rr78"
-                            title="TV broadcast coursework"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <!-- Video 3 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
-                        <iframe
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                            title="Video Placeholder 3"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <!-- Video 4 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
-                        <iframe
-                            src="https://www.youtube.com/embed/oHg5SJYRHA0"
-                            title="Video Placeholder 4"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <!-- Video 5 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
-                        <iframe
-                            src="https://www.youtube.com/embed/7Qx8j7oD-qg"
-                            title="Video Placeholder 5"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <!-- Video 6 (Placeholder - Update the embed link) --><div class="video-container shadow-lg hover:shadow-xl transition duration-300">
-                        <iframe
-                            src="https://www.youtube.com/embed/8eW_YQ-b8_s"
-                            title="Video Placeholder 6"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Social Media Section (5 Tweet Spots) --><section id="social-posts" class="mb-16">
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-8 flex items-center pb-3 border-b border-amber-300">
-                <i data-lucide="twitter" class="w-9 h-9 mr-3 text-amber-500"></i>
-                Key Social Media Mentions (5 Slots)
-            </h2>
-
-            <div class="bg-white p-8 rounded-2xl shadow-xl card-shadow-professional">
-                <h3 class="text-2xl font-bold mb-6 text-blue-800">Recent Hyperlinked Posts</h3>
-                <div class="space-y-6 grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-                    <!-- Tweet 1 Placeholder --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
-                        <a href="https://twitter.com/user/status/1234567890" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
-                            <p class="text-gray-900 font-semibold mb-1">
-                                Check out my thread on the new digital marketing trends! It's shaping up to be a fascinating year. 
-                                <span class="text-amber-500 font-medium">(Click to view Tweet)</span>
-                            </p>
-                            <span class="text-sm text-gray-500">@MediaUser | Oct 2025</span>
-                        </a>
-                    </div>
-                    <!-- Tweet 2 Placeholder --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
-                        <a href="https://twitter.com/user/status/9876543210" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
-                            <p class="text-gray-900 font-semibold mb-1">
-                                Had a great time covering the community event this weekend. Photos and video coming soon! 
-                                <span class="text-amber-500 font-medium">(Click to view Tweet)</span>
-                            </p>
-                            <span class="text-sm text-gray-500">@MediaUser | Sep 2025</span>
-                        </a>
-                    </div>
-                    <!-- Tweet 3 Placeholder (New) --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
-                        <a href="https://twitter.com/user/status/1112223330" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
-                            <p class="text-gray-900 font-semibold mb-1">
-                                My latest story for The Daily Athenaeum is live! Read about the incredible season opener for WVU Football. 
-                                <span class="text-amber-500 font-medium">(Click to view Tweet)</span>
-                            </p>
-                            <span class="text-sm text-gray-500">@BryceCohen | Aug 2025</span>
-                        </a>
-                    </div>
-                    <!-- Tweet 4 Placeholder (New) --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
-                        <a href="https://twitter.com/user/status/4445556660" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
-                            <p class="text-gray-900 font-semibold mb-1">
-                                Loved working on this production piece for Jomboy Media. Check out the final cut! 
-                                <span class="text-amber-500 font-medium">(Click to view Tweet)</span>
-                            </p>
-                            <span class="text-sm text-gray-500">@JomboyMedia | July 2025</span>
-                        </a>
-                    </div>
-                    <!-- Tweet 5 Placeholder (New) --><div class="border border-gray-200 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition duration-150 shadow-md">
-                        <a href="https://twitter.com/user/status/7778889990" target="_blank" rel="noopener noreferrer" class="block text-blue-700 hover:text-amber-600 hover:underline">
-                            <p class="text-gray-900 font-semibold mb-1">
-                                Great discussion today on sports ethics in my media class. Highly recommend this book: [Link to Book].
-                                <span class="text-amber-500 font-medium">(Click to view Tweet)</span>
-                            </p>
-                            <span class="text-sm text-gray-500">@BryceCohen | June 2025</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer (Strong, authoritative end) --><footer class="bg-blue-900 text-white p-8 mt-16">
-        <div class="container mx-auto text-center max-w-7xl">
-            <p class="text-sm">&copy; 2025 Bryce Cohen Media Portfolio. All rights reserved.</p>
+            
+            <!-- Floating Elements Background Decoration -->
+            <div class="absolute top-1/4 left-10 w-32 h-32 bg-brand-indigo rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-10 w-32 h-32 bg-brand-coral rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse-slow" style="animation-delay: 1s;"></div>
         </div>
-    </footer>
+
+        <!-- ================= EXPERIENCE PAGE ================= -->
+        <div id="experience" class="page-section hidden container mx-auto px-4 pb-20 max-w-7xl">
+            
+            <!-- Header Area: Resume & Links -->
+            <div class="glass-panel rounded-3xl p-8 mb-12 shadow-2xl animate-slide-up flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h2 class="text-4xl font-extrabold text-brand-dark mb-2">Professional Experience</h2>
+                    <p class="text-slate-500">Curated works from The Daily Athenaeum, Jomboy Media, and more.</p>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <a href="/assets/my_resume.pdf" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-brand-dark text-white rounded-xl font-semibold hover:bg-slate-700 transition-all hover:scale-105">
+                        <i data-lucide="file-text" class="w-5 h-5"></i> Download Resume
+                    </a>
+                    <a href="https://linkedin.com/in/bryce-cohen1" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-[#0077b5] text-white rounded-xl font-semibold hover:bg-[#006396] transition-all hover:scale-105">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <!-- SECTION 1: 6 Articles Grid -->
+            <div class="mb-16 animate-slide-up" style="animation-delay: 0.1s;">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="bg-brand-indigo p-2 rounded-lg"><i data-lucide="file-text" class="w-6 h-6 text-white"></i></span>
+                    Featured Journalism
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Article Card 1 -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=Article+1" alt="Article 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-indigo uppercase tracking-wider">The Daily Athenaeum</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Analyzing the defensive strategy shift in WVU Football</h4>
+                            <p class="text-slate-500 text-sm mb-4">A deep dive into statistical anomalies during the 2024 season opener.</p>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                        </div>
+                    </div>
+                     <!-- Article Card 2 -->
+                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://placehold.co/600x400/334155/FFF?text=Article+2" alt="Article 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Investigative</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">The impact of NIL deals on collegiate recruiting</h4>
+                            <p class="text-slate-500 text-sm mb-4">Exploring the financial landscape of modern college athletics.</p>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                        </div>
+                    </div>
+                     <!-- Article Card 3 -->
+                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://placehold.co/600x400/475569/FFF?text=Article+3" alt="Article 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-coral uppercase tracking-wider">Feature Story</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Profile: The rise of the underdog pitcher</h4>
+                            <p class="text-slate-500 text-sm mb-4">From walk-on to starter: an interview with the season's breakout star.</p>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                        </div>
+                    </div>
+                     <!-- Article Card 4 -->
+                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://placehold.co/600x400/64748b/FFF?text=Article+4" alt="Article 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-indigo uppercase tracking-wider">Opinion</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Why the expanded playoff format changes everything</h4>
+                            <p class="text-slate-500 text-sm mb-4">An editorial on the future of postseason intensity.</p>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                        </div>
+                    </div>
+                     <!-- Article Card 5 -->
+                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://placehold.co/600x400/94a3b8/FFF?text=Article+5" alt="Article 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-indigo uppercase tracking-wider">Game Recap</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Mountaineers clinch victory in overtime thriller</h4>
+                            <p class="text-slate-500 text-sm mb-4">Play-by-play breakdown of the final drive.</p>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                        </div>
+                    </div>
+                     <!-- Article Card 6 -->
+                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://placehold.co/600x400/cbd5e1/FFF?text=Article+6" alt="Article 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-coral uppercase tracking-wider">Culture</span>
+                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Esports integration in varsity programs</h4>
+                            <p class="text-slate-500 text-sm mb-4">How digital sports are gaining legitimacy on campus.</p>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Short Form Video Content (Addictive Interface) -->
+            <div class="mb-16 animate-slide-up" style="animation-delay: 0.2s;">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="bg-gradient-to-r from-pink-500 to-orange-500 p-2 rounded-lg"><i data-lucide="play" class="w-6 h-6 text-white"></i></span>
+                    Viral & Short Form Content
+                </h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <!-- TikTok 1 -->
+                    <div class="rounded-2xl overflow-hidden border-4 border-black shadow-2xl bg-black aspect-9-16 relative group">
+                        <iframe class="w-full h-full" src="https://www.tiktok.com/embed/123456789" allowfullscreen></iframe>
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center pointer-events-none group-hover:bg-transparent transition-all">
+                            <i data-lucide="play" class="w-12 h-12 text-white opacity-80"></i>
+                        </div>
+                        <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-white text-xs font-bold">TikTok Trend</p>
+                        </div>
+                    </div>
+                    <!-- TikTok 2 -->
+                    <div class="rounded-2xl overflow-hidden border-4 border-black shadow-2xl bg-black aspect-9-16 relative group">
+                        <iframe class="w-full h-full" src="https://www.tiktok.com/embed/987654321" allowfullscreen></iframe>
+                         <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-white text-xs font-bold">TikTok Analysis</p>
+                        </div>
+                    </div>
+                    <!-- Reel 1 -->
+                    <div class="rounded-2xl overflow-hidden border-4 border-pink-600 shadow-2xl bg-black aspect-9-16 relative group">
+                        <iframe class="w-full h-full" src="https://www.instagram.com/reel/123/embed" frameborder="0"></iframe>
+                         <div class="absolute bottom-2 left-2 right-2 bg-pink-600/80 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-white text-xs font-bold">IG Reel Highlight</p>
+                        </div>
+                    </div>
+                     <!-- Reel 2 -->
+                     <div class="rounded-2xl overflow-hidden border-4 border-pink-600 shadow-2xl bg-black aspect-9-16 relative group">
+                        <iframe class="w-full h-full" src="https://www.instagram.com/reel/456/embed" frameborder="0"></iframe>
+                         <div class="absolute bottom-2 left-2 right-2 bg-pink-600/80 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-white text-xs font-bold">IG Reel BTS</p>
+                        </div>
+                    </div>
+                    <!-- YT Short 1 -->
+                    <div class="rounded-2xl overflow-hidden border-4 border-red-600 shadow-2xl bg-black aspect-9-16 relative group">
+                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/shorts_id_1" frameborder="0"></iframe>
+                         <div class="absolute bottom-2 left-2 right-2 bg-red-600/80 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-white text-xs font-bold">YT Short Clip</p>
+                        </div>
+                    </div>
+                     <!-- YT Short 2 -->
+                     <div class="rounded-2xl overflow-hidden border-4 border-red-600 shadow-2xl bg-black aspect-9-16 relative group">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/shorts_id_2" frameborder="0"></iframe>
+                         <div class="absolute bottom-2 left-2 right-2 bg-red-600/80 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-white text-xs font-bold">YT Short Edit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: The X (Twitter) Feed -->
+            <div class="mb-12 animate-slide-up" style="animation-delay: 0.3s;">
+                <h3 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="bg-black p-2 rounded-lg"><i data-lucide="twitter" class="w-6 h-6 text-white"></i></span>
+                    Real-time Updates (X/Twitter)
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Tweet 1 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-bold text-slate-800">@BryceCohen</div>
+                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                        </div>
+                        <p class="text-slate-600 mb-4">Just wrapped up coverage of the championship game. The energy in the stadium was absolutely electric. Full story coming tomorrow! 🏟️🏈</p>
+                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                    </div>
+                    <!-- Tweet 2 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-bold text-slate-800">@BryceCohen</div>
+                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                        </div>
+                        <p class="text-slate-600 mb-4">Editing breakdown: How we turned a 2-hour interview into a 30-second viral clip for Jomboy. It's all about the pacing. ✂️🎞️</p>
+                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                    </div>
+                    <!-- Tweet 3 -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-bold text-slate-800">@BryceCohen</div>
+                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                        </div>
+                        <p class="text-slate-600 mb-4">Opinion: The new rule changes are actually good for the pace of play. Don't @ me. #SportsTalk</p>
+                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                    </div>
+                     <!-- Tweet 4 -->
+                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-bold text-slate-800">@BryceCohen</div>
+                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                        </div>
+                        <p class="text-slate-600 mb-4">Caught this incredible angle during the 4th quarter. Photography is all about being in the right place at the right time. 📸</p>
+                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                    </div>
+                     <!-- Tweet 5 -->
+                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-bold text-slate-800">@BryceCohen</div>
+                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                        </div>
+                        <p class="text-slate-600 mb-4">Huge thanks to the team at The Daily Athenaeum for the hard work this week. Print journalism is alive and well.</p>
+                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                    </div>
+                     <!-- Tweet 6 -->
+                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-bold text-slate-800">@BryceCohen</div>
+                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                        </div>
+                        <p class="text-slate-600 mb-4">My top 3 takeaways from today's press conference: 1. Defense is key. 2. Injuries are healing. 3. Momentum is shifting.</p>
+                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= ABOUT ME PAGE ================= -->
+        <div id="about" class="page-section hidden container mx-auto px-4 pb-20 max-w-7xl">
+            
+            <div class="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl animate-slide-up">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-black text-brand-dark mb-4">Behind the Lens</h2>
+                    <p class="text-xl text-slate-500 max-w-2xl mx-auto">More than just a producer. A storyteller, a sports enthusiast, and a creative mind constantly exploring new mediums.</p>
+                </div>
+
+                <!-- 4 Photos with Captions Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <!-- Photo 1 -->
+                    <div class="bg-white p-4 rounded-2xl shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64">
+                            <img src="https://placehold.co/600x400/1e293b/FFF?text=On+Set+Photo" alt="On Set" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-handwriting text-slate-600 text-center italic">"Working the sideline cam at the Mountaineer game. Rain or shine!"</p>
+                    </div>
+                     <!-- Photo 2 -->
+                     <div class="bg-white p-4 rounded-2xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64">
+                            <img src="https://placehold.co/600x400/334155/FFF?text=Editing+Bay" alt="Editing" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-handwriting text-slate-600 text-center italic">"Late nights in the editing bay at Jomboy Media. Where the magic happens."</p>
+                    </div>
+                     <!-- Photo 3 -->
+                     <div class="bg-white p-4 rounded-2xl shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64">
+                            <img src="https://placehold.co/600x400/475569/FFF?text=Interview" alt="Interviewing" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-handwriting text-slate-600 text-center italic">"Interviewing Coach Brown post-game. Asking the tough questions."</p>
+                    </div>
+                     <!-- Photo 4 -->
+                     <div class="bg-white p-4 rounded-2xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64">
+                            <img src="https://placehold.co/600x400/64748b/FFF?text=Travel" alt="Travel" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-handwriting text-slate-600 text-center italic">"On the road for the away series. Coffee is my fuel."</p>
+                    </div>
+                </div>
+
+                <!-- General Summary -->
+                <div class="bg-gradient-to-r from-brand-indigo to-brand-dark p-8 rounded-2xl text-white shadow-xl">
+                    <h3 class="text-2xl font-bold mb-4">About Bryce</h3>
+                    <p class="text-lg leading-relaxed opacity-90">
+                        I am currently a junior at West Virginia University, where my passion for sports and storytelling collide. As the Sports Managing Editor for The Daily Athenaeum, I oversee a team of writers and photographers, ensuring we capture the pulse of campus athletics. My time at Jomboy Media has sharpened my production skills, teaching me the nuances of digital engagement and viral content creation. Whether I'm behind the camera, in the editing suite, or writing a feature story, my goal remains the same: to tell stories that matter, in a way that people can't stop watching.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>
