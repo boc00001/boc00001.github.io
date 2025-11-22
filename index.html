@@ -10,10 +10,10 @@
             theme: {
                 extend: {
                     colors: {
-                        'brand-dark': '#0f172a',
-                        'brand-indigo': '#6366f1',
-                        'brand-coral': '#f472b6',
-                        'brand-glass': 'rgba(255, 255, 255, 0.7)',
+                        'brand-dark': '#0f172a', /* Deep Navy for Text */
+                        'brand-primary': '#3b82f6', /* Royal Blue */
+                        'brand-accent': '#e11d48', /* Vivid Rose/Red */
+                        'brand-surface': '#ffffff',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -21,7 +21,7 @@
                     animation: {
                         'fade-in': 'fadeIn 0.5s ease-out forwards',
                         'slide-up': 'slideUp 0.6s ease-out forwards',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         fadeIn: {
@@ -42,27 +42,32 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: #f8fafc;
-            /* subtle animated background mesh */
-            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            background-color: #f8fafc;
+            /* Lighter, subtle background gradients for better readability */
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(217, 91%, 91%, 1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(280, 70%, 95%, 1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(340, 80%, 95%, 1) 0, transparent 50%);
             background-size: 100% 100%;
             background-attachment: fixed;
             min-height: 100vh;
+            color: #334155; /* Slate-700 default text */
         }
 
-        /* Glassmorphism utilities */
+        /* Glassmorphism utilities - Adjusted for Light Mode */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
 
         .glass-nav {
-            background: rgba(15, 23, 42, 0.85); /* Dark glass for nav */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.8); /* Light glass for nav */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
         }
 
         /* Hide scrollbar for clean look but allow scroll */
@@ -81,11 +86,11 @@
     </style>
     <!-- Lucide Icons -->
     <script type="module">
-        import { createIcons, Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
+        import { createIcons, Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
         
         // Initialize icons after DOM load
         window.addEventListener('DOMContentLoaded', () => {
-            createIcons({ icons: { Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink } });
+            createIcons({ icons: { Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera } });
         });
         
         // Expose navigation function globally
@@ -103,41 +108,45 @@
             
             // Update nav state
             document.querySelectorAll('.nav-link').forEach(el => {
-                el.classList.remove('text-brand-coral', 'font-bold');
-                el.classList.add('text-gray-300');
+                el.classList.remove('text-brand-primary', 'font-bold', 'bg-blue-50');
+                el.classList.add('text-slate-500');
             });
-            document.getElementById(`nav-${pageId}`).classList.add('text-brand-coral', 'font-bold');
-            document.getElementById(`nav-${pageId}`).classList.remove('text-gray-300');
+            
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if(activeNav) {
+                activeNav.classList.add('text-brand-primary', 'font-bold', 'bg-blue-50');
+                activeNav.classList.remove('text-slate-500');
+            }
 
             // Scroll to top
             window.scrollTo(0,0);
         };
     </script>
 </head>
-<body class="text-slate-800 selection:bg-brand-coral selection:text-white">
+<body class="selection:bg-brand-primary selection:text-white">
 
-    <!-- Sticky Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-nav shadow-lg">
+    <!-- Sticky Navigation (Light Mode) -->
+    <nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
             <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
-                <div class="w-8 h-8 bg-gradient-to-br from-brand-indigo to-brand-coral rounded-lg flex items-center justify-center text-white font-bold text-lg">B</div>
-                <span class="text-xl font-bold text-white tracking-tight">Bryce<span class="text-brand-coral">Cohen</span></span>
+                <div class="w-8 h-8 bg-gradient-to-br from-brand-primary to-brand-accent rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-md">B</div>
+                <span class="text-xl font-bold text-brand-dark tracking-tight">Bryce<span class="text-brand-primary">Cohen</span></span>
             </div>
             
-            <div class="hidden md:flex space-x-8">
-                <button id="nav-home" onclick="navigateTo('home')" class="nav-link text-brand-coral font-bold hover:text-white transition-colors flex items-center gap-2">
+            <div class="hidden md:flex space-x-2">
+                <button id="nav-home" onclick="navigateTo('home')" class="nav-link px-4 py-2 rounded-lg text-brand-primary font-bold bg-blue-50 hover:bg-blue-100 transition-all flex items-center gap-2">
                     <i data-lucide="home" class="w-4 h-4"></i> Home
                 </button>
-                <button id="nav-experience" onclick="navigateTo('experience')" class="nav-link text-gray-300 hover:text-white transition-colors flex items-center gap-2">
+                <button id="nav-experience" onclick="navigateTo('experience')" class="nav-link px-4 py-2 rounded-lg text-slate-500 hover:text-brand-dark hover:bg-slate-50 transition-all flex items-center gap-2">
                     <i data-lucide="briefcase" class="w-4 h-4"></i> Experience
                 </button>
-                <button id="nav-about" onclick="navigateTo('about')" class="nav-link text-gray-300 hover:text-white transition-colors flex items-center gap-2">
+                <button id="nav-about" onclick="navigateTo('about')" class="nav-link px-4 py-2 rounded-lg text-slate-500 hover:text-brand-dark hover:bg-slate-50 transition-all flex items-center gap-2">
                     <i data-lucide="user" class="w-4 h-4"></i> About Me
                 </button>
             </div>
 
-            <!-- Mobile Menu Button (Simplified for layout) -->
-            <button class="md:hidden text-white" onclick="navigateTo('experience')">
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-brand-dark" onclick="navigateTo('experience')">
                 <i data-lucide="briefcase" class="w-6 h-6"></i>
             </button>
         </div>
@@ -148,47 +157,46 @@
 
         <!-- ================= HOME PAGE ================= -->
         <div id="home" class="page-section container mx-auto px-4 flex flex-col items-center justify-center min-h-[85vh] text-center">
-            <div class="animate-slide-up">
-                <span class="inline-block py-1 px-3 rounded-full bg-brand-indigo/20 text-brand-indigo border border-brand-indigo/30 text-sm font-semibold mb-6 backdrop-blur-sm bg-white/10 text-white">
+            <div class="animate-slide-up relative z-10">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-brand-primary border border-blue-200 text-sm font-bold mb-6">
                     Multimedia Specialist & Editor
                 </span>
-                <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter mb-6 drop-shadow-2xl">
-                    Journalist. <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-coral to-brand-indigo">Broadcaster.</span> Creator.
+                <h1 class="text-6xl md:text-8xl font-black text-brand-dark tracking-tighter mb-6 drop-shadow-sm">
+                    Create. <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent">Captivate.</span> Connect.
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                <p class="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
                     Welcome to the portfolio of Bryce Cohen. Journalism, video production, and digital storytelling at the intersection of sports and culture.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="navigateTo('experience')" class="group relative px-8 py-4 bg-white text-brand-dark font-bold rounded-full text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(244,114,182,0.6)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                    <button onclick="navigateTo('experience')" class="group relative px-8 py-4 bg-brand-dark text-white font-bold rounded-full text-lg shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all transform hover:-translate-y-1 overflow-hidden">
                         <span class="relative z-10 flex items-center gap-2">Explore Work <i data-lucide="arrow-right" class="w-5 h-5"></i></span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-brand-coral to-brand-indigo opacity-0 group-hover:opacity-20 transition-opacity"></div>
                     </button>
-                    <button onclick="navigateTo('about')" class="px-8 py-4 glass-panel text-brand-dark font-bold rounded-full text-lg hover:bg-white transition-all transform hover:-translate-y-1">
+                    <button onclick="navigateTo('about')" class="px-8 py-4 bg-white text-brand-dark font-bold rounded-full text-lg border border-slate-200 hover:border-brand-primary hover:text-brand-primary shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1">
                         Meet Bryce
                     </button>
                 </div>
             </div>
             
-            <!-- Floating Elements Background Decoration -->
-            <div class="absolute top-1/4 left-10 w-32 h-32 bg-brand-indigo rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse-slow"></div>
-            <div class="absolute bottom-1/4 right-10 w-32 h-32 bg-brand-coral rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse-slow" style="animation-delay: 1s;"></div>
+            <!-- Soft Background Blobs (Light Mode) -->
+            <div class="absolute top-1/4 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-10 w-64 h-64 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse-slow" style="animation-delay: 1s;"></div>
         </div>
 
         <!-- ================= EXPERIENCE PAGE ================= -->
         <div id="experience" class="page-section hidden container mx-auto px-4 pb-20 max-w-7xl">
             
             <!-- Header Area: Resume & Links -->
-            <div class="glass-panel rounded-3xl p-8 mb-12 shadow-2xl animate-slide-up flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="glass-panel rounded-3xl p-8 mb-12 shadow-sm animate-slide-up flex flex-col md:flex-row justify-between items-center gap-6">
                 <div>
                     <h2 class="text-4xl font-extrabold text-brand-dark mb-2">Professional Experience</h2>
-                    <p class="text-slate-500">Curated works from The Daily Athenaeum, Jomboy Media, and more.</p>
+                    <p class="text-slate-500 font-medium">Curated works from The Daily Athenaeum, Jomboy Media, and more.</p>
                 </div>
                 <div class="flex flex-wrap gap-4">
-                    <a href="/assets/my_resume.pdf" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-brand-dark text-white rounded-xl font-semibold hover:bg-slate-700 transition-all hover:scale-105">
+                    <a href="/assets/my_resume.pdf" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-brand-dark text-white rounded-xl font-semibold hover:bg-slate-800 transition-all hover:scale-105 shadow-md">
                         <i data-lucide="file-text" class="w-5 h-5"></i> Download Resume
                     </a>
-                    <a href="https://linkedin.com/in/bryce-cohen1" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-[#0077b5] text-white rounded-xl font-semibold hover:bg-[#006396] transition-all hover:scale-105">
+                    <a href="https://linkedin.com/in/bryce-cohen1" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-[#0077b5] text-white rounded-xl font-semibold hover:bg-[#006396] transition-all hover:scale-105 shadow-md">
                         <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
                     </a>
                 </div>
@@ -196,203 +204,246 @@
 
             <!-- SECTION 1: 6 Articles Grid -->
             <div class="mb-16 animate-slide-up" style="animation-delay: 0.1s;">
-                <h3 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-                    <span class="bg-brand-indigo p-2 rounded-lg"><i data-lucide="file-text" class="w-6 h-6 text-white"></i></span>
+                <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
+                    <span class="bg-blue-100 p-2 rounded-lg"><i data-lucide="file-text" class="w-6 h-6 text-brand-primary"></i></span>
                     Featured Journalism
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Article Card 1 -->
-                    <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=Article+1" alt="Article 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                        <div class="h-48 overflow-hidden bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Article+1" alt="Article 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6">
-                            <span class="text-xs font-bold text-brand-indigo uppercase tracking-wider">The Daily Athenaeum</span>
-                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Analyzing the defensive strategy shift in WVU Football</h4>
+                            <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">The Daily Athenaeum</span>
+                            <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">Analyzing the defensive strategy shift in WVU Football</h4>
                             <p class="text-slate-500 text-sm mb-4">A deep dive into statistical anomalies during the 2024 season opener.</p>
-                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </div>
                      <!-- Article Card 2 -->
-                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://placehold.co/600x400/334155/FFF?text=Article+2" alt="Article 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                     <div class="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                        <div class="h-48 overflow-hidden bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Article+2" alt="Article 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6">
                             <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Investigative</span>
-                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">The impact of NIL deals on collegiate recruiting</h4>
+                            <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">The impact of NIL deals on collegiate recruiting</h4>
                             <p class="text-slate-500 text-sm mb-4">Exploring the financial landscape of modern college athletics.</p>
-                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </div>
                      <!-- Article Card 3 -->
-                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://placehold.co/600x400/475569/FFF?text=Article+3" alt="Article 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                     <div class="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                        <div class="h-48 overflow-hidden bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Article+3" alt="Article 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6">
-                            <span class="text-xs font-bold text-brand-coral uppercase tracking-wider">Feature Story</span>
-                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Profile: The rise of the underdog pitcher</h4>
+                            <span class="text-xs font-bold text-brand-accent uppercase tracking-wider">Feature Story</span>
+                            <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">Profile: The rise of the underdog pitcher</h4>
                             <p class="text-slate-500 text-sm mb-4">From walk-on to starter: an interview with the season's breakout star.</p>
-                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </div>
                      <!-- Article Card 4 -->
-                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://placehold.co/600x400/64748b/FFF?text=Article+4" alt="Article 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                     <div class="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                        <div class="h-48 overflow-hidden bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Article+4" alt="Article 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6">
-                            <span class="text-xs font-bold text-brand-indigo uppercase tracking-wider">Opinion</span>
-                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Why the expanded playoff format changes everything</h4>
+                            <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Opinion</span>
+                            <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">Why the expanded playoff format changes everything</h4>
                             <p class="text-slate-500 text-sm mb-4">An editorial on the future of postseason intensity.</p>
-                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </div>
                      <!-- Article Card 5 -->
-                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://placehold.co/600x400/94a3b8/FFF?text=Article+5" alt="Article 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                     <div class="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                        <div class="h-48 overflow-hidden bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Article+5" alt="Article 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6">
-                            <span class="text-xs font-bold text-brand-indigo uppercase tracking-wider">Game Recap</span>
-                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Mountaineers clinch victory in overtime thriller</h4>
+                            <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Game Recap</span>
+                            <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">Mountaineers clinch victory in overtime thriller</h4>
                             <p class="text-slate-500 text-sm mb-4">Play-by-play breakdown of the final drive.</p>
-                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </div>
                      <!-- Article Card 6 -->
-                     <div class="group relative overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
-                        <div class="h-48 overflow-hidden">
-                            <img src="https://placehold.co/600x400/cbd5e1/FFF?text=Article+6" alt="Article 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                     <div class="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                        <div class="h-48 overflow-hidden bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Article+6" alt="Article 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6">
-                            <span class="text-xs font-bold text-brand-coral uppercase tracking-wider">Culture</span>
-                            <h4 class="text-xl font-bold text-slate-800 mt-2 mb-3 leading-tight group-hover:text-brand-indigo transition-colors">Esports integration in varsity programs</h4>
+                            <span class="text-xs font-bold text-brand-accent uppercase tracking-wider">Culture</span>
+                            <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">Esports integration in varsity programs</h4>
                             <p class="text-slate-500 text-sm mb-4">How digital sports are gaining legitimacy on campus.</p>
-                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-coral flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
+                            <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SECTION 2: Short Form Video Content (Addictive Interface) -->
+            <!-- SECTION 2: Short Form Video Content -->
             <div class="mb-16 animate-slide-up" style="animation-delay: 0.2s;">
-                <h3 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
-                    <span class="bg-gradient-to-r from-pink-500 to-orange-500 p-2 rounded-lg"><i data-lucide="play" class="w-6 h-6 text-white"></i></span>
+                <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
+                    <span class="bg-gradient-to-r from-rose-400 to-orange-400 p-2 rounded-lg"><i data-lucide="play" class="w-6 h-6 text-white"></i></span>
                     Viral & Short Form Content
                 </h3>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     <!-- TikTok 1 -->
-                    <div class="rounded-2xl overflow-hidden border-4 border-black shadow-2xl bg-black aspect-9-16 relative group">
+                    <div class="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all aspect-9-16 relative group bg-black">
                         <iframe class="w-full h-full" src="https://www.tiktok.com/embed/123456789" allowfullscreen></iframe>
-                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center pointer-events-none group-hover:bg-transparent transition-all">
-                            <i data-lucide="play" class="w-12 h-12 text-white opacity-80"></i>
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none group-hover:bg-transparent transition-all">
+                            <i data-lucide="play" class="w-12 h-12 text-white opacity-90"></i>
                         </div>
-                        <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-white text-xs font-bold">TikTok Trend</p>
+                        <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-slate-900 text-xs font-bold">TikTok Trend</p>
                         </div>
                     </div>
                     <!-- TikTok 2 -->
-                    <div class="rounded-2xl overflow-hidden border-4 border-black shadow-2xl bg-black aspect-9-16 relative group">
+                    <div class="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all aspect-9-16 relative group bg-black">
                         <iframe class="w-full h-full" src="https://www.tiktok.com/embed/987654321" allowfullscreen></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-white text-xs font-bold">TikTok Analysis</p>
+                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-slate-900 text-xs font-bold">TikTok Analysis</p>
                         </div>
                     </div>
                     <!-- Reel 1 -->
-                    <div class="rounded-2xl overflow-hidden border-4 border-pink-600 shadow-2xl bg-black aspect-9-16 relative group">
+                    <div class="rounded-2xl overflow-hidden border-2 border-pink-200 shadow-md hover:shadow-xl hover:border-brand-accent transition-all aspect-9-16 relative group bg-black">
                         <iframe class="w-full h-full" src="https://www.instagram.com/reel/123/embed" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-pink-600/80 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-white text-xs font-bold">IG Reel Highlight</p>
+                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-slate-900 text-xs font-bold">IG Reel Highlight</p>
                         </div>
                     </div>
                      <!-- Reel 2 -->
-                     <div class="rounded-2xl overflow-hidden border-4 border-pink-600 shadow-2xl bg-black aspect-9-16 relative group">
+                     <div class="rounded-2xl overflow-hidden border-2 border-pink-200 shadow-md hover:shadow-xl hover:border-brand-accent transition-all aspect-9-16 relative group bg-black">
                         <iframe class="w-full h-full" src="https://www.instagram.com/reel/456/embed" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-pink-600/80 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-white text-xs font-bold">IG Reel BTS</p>
+                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-slate-900 text-xs font-bold">IG Reel BTS</p>
                         </div>
                     </div>
                     <!-- YT Short 1 -->
-                    <div class="rounded-2xl overflow-hidden border-4 border-red-600 shadow-2xl bg-black aspect-9-16 relative group">
+                    <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md hover:shadow-xl hover:border-red-500 transition-all aspect-9-16 relative group bg-black">
                          <iframe class="w-full h-full" src="https://www.youtube.com/embed/shorts_id_1" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-red-600/80 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-white text-xs font-bold">YT Short Clip</p>
+                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-slate-900 text-xs font-bold">YT Short Clip</p>
                         </div>
                     </div>
                      <!-- YT Short 2 -->
-                     <div class="rounded-2xl overflow-hidden border-4 border-red-600 shadow-2xl bg-black aspect-9-16 relative group">
+                     <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md hover:shadow-xl hover:border-red-500 transition-all aspect-9-16 relative group bg-black">
                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/shorts_id_2" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-red-600/80 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-white text-xs font-bold">YT Short Edit</p>
+                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
+                            <p class="text-slate-900 text-xs font-bold">YT Short Edit</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- SECTION 3: The X (Twitter) Feed -->
-            <div class="mb-12 animate-slide-up" style="animation-delay: 0.3s;">
-                <h3 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+            <div class="mb-16 animate-slide-up" style="animation-delay: 0.3s;">
+                <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
                     <span class="bg-black p-2 rounded-lg"><i data-lucide="twitter" class="w-6 h-6 text-white"></i></span>
                     Real-time Updates (X/Twitter)
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Tweet 1 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                    <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-slate-100 hover:border-brand-primary">
                         <div class="flex items-center justify-between mb-3">
                             <div class="font-bold text-slate-800">@BryceCohen</div>
-                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                            <i data-lucide="twitter" class="w-4 h-4 text-brand-primary"></i>
                         </div>
                         <p class="text-slate-600 mb-4">Just wrapped up coverage of the championship game. The energy in the stadium was absolutely electric. Full story coming tomorrow! 🏟️🏈</p>
-                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                        <a href="#" class="text-xs text-brand-primary font-bold hover:underline">View on X</a>
                     </div>
                     <!-- Tweet 2 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                    <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-slate-100 hover:border-brand-primary">
                         <div class="flex items-center justify-between mb-3">
                             <div class="font-bold text-slate-800">@BryceCohen</div>
-                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                            <i data-lucide="twitter" class="w-4 h-4 text-brand-primary"></i>
                         </div>
                         <p class="text-slate-600 mb-4">Editing breakdown: How we turned a 2-hour interview into a 30-second viral clip for Jomboy. It's all about the pacing. ✂️🎞️</p>
-                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                        <a href="#" class="text-xs text-brand-primary font-bold hover:underline">View on X</a>
                     </div>
                     <!-- Tweet 3 -->
-                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                    <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-slate-100 hover:border-brand-primary">
                         <div class="flex items-center justify-between mb-3">
                             <div class="font-bold text-slate-800">@BryceCohen</div>
-                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                            <i data-lucide="twitter" class="w-4 h-4 text-brand-primary"></i>
                         </div>
                         <p class="text-slate-600 mb-4">Opinion: The new rule changes are actually good for the pace of play. Don't @ me. #SportsTalk</p>
-                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                        <a href="#" class="text-xs text-brand-primary font-bold hover:underline">View on X</a>
                     </div>
                      <!-- Tweet 4 -->
-                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                     <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-slate-100 hover:border-brand-primary">
                         <div class="flex items-center justify-between mb-3">
                             <div class="font-bold text-slate-800">@BryceCohen</div>
-                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                            <i data-lucide="twitter" class="w-4 h-4 text-brand-primary"></i>
                         </div>
                         <p class="text-slate-600 mb-4">Caught this incredible angle during the 4th quarter. Photography is all about being in the right place at the right time. 📸</p>
-                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                        <a href="#" class="text-xs text-brand-primary font-bold hover:underline">View on X</a>
                     </div>
                      <!-- Tweet 5 -->
-                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                     <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-slate-100 hover:border-brand-primary">
                         <div class="flex items-center justify-between mb-3">
                             <div class="font-bold text-slate-800">@BryceCohen</div>
-                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                            <i data-lucide="twitter" class="w-4 h-4 text-brand-primary"></i>
                         </div>
                         <p class="text-slate-600 mb-4">Huge thanks to the team at The Daily Athenaeum for the hard work this week. Print journalism is alive and well.</p>
-                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                        <a href="#" class="text-xs text-brand-primary font-bold hover:underline">View on X</a>
                     </div>
                      <!-- Tweet 6 -->
-                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-l-4 border-black">
+                     <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-slate-100 hover:border-brand-primary">
                         <div class="flex items-center justify-between mb-3">
                             <div class="font-bold text-slate-800">@BryceCohen</div>
-                            <i data-lucide="twitter" class="w-4 h-4 text-black"></i>
+                            <i data-lucide="twitter" class="w-4 h-4 text-brand-primary"></i>
                         </div>
                         <p class="text-slate-600 mb-4">My top 3 takeaways from today's press conference: 1. Defense is key. 2. Injuries are healing. 3. Momentum is shifting.</p>
-                        <a href="#" class="text-xs text-brand-indigo font-bold hover:underline">View on X</a>
+                        <a href="#" class="text-xs text-brand-primary font-bold hover:underline">View on X</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: Photography Gallery -->
+            <div class="mb-12 animate-slide-up" style="animation-delay: 0.4s;">
+                <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
+                    <span class="bg-indigo-500 p-2 rounded-lg"><i data-lucide="camera" class="w-6 h-6 text-white"></i></span>
+                    Photography Portfolio
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Photo 1 -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer h-64 md:h-80">
+                        <img src="https://placehold.co/800x600/1e293b/FFF?text=Action+Shot" alt="Action Shot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                            <p class="text-white font-bold text-lg">Game Day Action</p>
+                            <p class="text-slate-200 text-sm">Mountaineer Field</p>
+                        </div>
+                    </div>
+                    <!-- Photo 2 -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer h-64 md:h-80">
+                        <img src="https://placehold.co/800x600/334155/FFF?text=Portrait" alt="Portrait" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                            <p class="text-white font-bold text-lg">Player Profile</p>
+                            <p class="text-slate-200 text-sm">Studio Lighting</p>
+                        </div>
+                    </div>
+                    <!-- Photo 3 -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer h-64 md:h-80">
+                        <img src="https://placehold.co/800x600/475569/FFF?text=Crowd+Reaction" alt="Crowd" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                            <p class="text-white font-bold text-lg">The Student Section</p>
+                            <p class="text-slate-200 text-sm">Raw Emotion</p>
+                        </div>
+                    </div>
+                    <!-- Photo 4 -->
+                    <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer h-64 md:h-80">
+                        <img src="https://placehold.co/800x600/64748b/FFF?text=Post-Game" alt="Post Game" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                            <p class="text-white font-bold text-lg">Victory Celebration</p>
+                            <p class="text-slate-200 text-sm">Locker Room Access</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -402,7 +453,7 @@
         <!-- ================= ABOUT ME PAGE ================= -->
         <div id="about" class="page-section hidden container mx-auto px-4 pb-20 max-w-7xl">
             
-            <div class="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl animate-slide-up">
+            <div class="glass-panel rounded-3xl p-8 md:p-12 shadow-lg animate-slide-up">
                 <div class="text-center mb-12">
                     <h2 class="text-4xl md:text-5xl font-black text-brand-dark mb-4">Behind the Lens</h2>
                     <p class="text-xl text-slate-500 max-w-2xl mx-auto">More than just a producer. A storyteller, a sports enthusiast, and a creative mind constantly exploring new mediums.</p>
@@ -411,37 +462,37 @@
                 <!-- 4 Photos with Captions Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                     <!-- Photo 1 -->
-                    <div class="bg-white p-4 rounded-2xl shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <div class="overflow-hidden rounded-xl mb-3 h-64">
-                            <img src="https://placehold.co/600x400/1e293b/FFF?text=On+Set+Photo" alt="On Set" class="w-full h-full object-cover">
+                    <div class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64 bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=On+Set+Photo" alt="On Set" class="w-full h-full object-cover">
                         </div>
                         <p class="font-handwriting text-slate-600 text-center italic">"Working the sideline cam at the Mountaineer game. Rain or shine!"</p>
                     </div>
                      <!-- Photo 2 -->
-                     <div class="bg-white p-4 rounded-2xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <div class="overflow-hidden rounded-xl mb-3 h-64">
-                            <img src="https://placehold.co/600x400/334155/FFF?text=Editing+Bay" alt="Editing" class="w-full h-full object-cover">
+                     <div class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64 bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Editing+Bay" alt="Editing" class="w-full h-full object-cover">
                         </div>
                         <p class="font-handwriting text-slate-600 text-center italic">"Late nights in the editing bay at Jomboy Media. Where the magic happens."</p>
                     </div>
                      <!-- Photo 3 -->
-                     <div class="bg-white p-4 rounded-2xl shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <div class="overflow-hidden rounded-xl mb-3 h-64">
-                            <img src="https://placehold.co/600x400/475569/FFF?text=Interview" alt="Interviewing" class="w-full h-full object-cover">
+                     <div class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64 bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Interview" alt="Interviewing" class="w-full h-full object-cover">
                         </div>
                         <p class="font-handwriting text-slate-600 text-center italic">"Interviewing Coach Brown post-game. Asking the tough questions."</p>
                     </div>
                      <!-- Photo 4 -->
-                     <div class="bg-white p-4 rounded-2xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-                        <div class="overflow-hidden rounded-xl mb-3 h-64">
-                            <img src="https://placehold.co/600x400/64748b/FFF?text=Travel" alt="Travel" class="w-full h-full object-cover">
+                     <div class="bg-white p-4 rounded-2xl shadow-md border border-slate-100 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="overflow-hidden rounded-xl mb-3 h-64 bg-slate-100">
+                            <img src="https://placehold.co/600x400/e2e8f0/475569?text=Travel" alt="Travel" class="w-full h-full object-cover">
                         </div>
                         <p class="font-handwriting text-slate-600 text-center italic">"On the road for the away series. Coffee is my fuel."</p>
                     </div>
                 </div>
 
                 <!-- General Summary -->
-                <div class="bg-gradient-to-r from-brand-indigo to-brand-dark p-8 rounded-2xl text-white shadow-xl">
+                <div class="bg-brand-dark p-8 rounded-2xl text-white shadow-xl">
                     <h3 class="text-2xl font-bold mb-4">About Bryce</h3>
                     <p class="text-lg leading-relaxed opacity-90">
                         I am currently a junior at West Virginia University, where my passion for sports and storytelling collide. As the Sports Managing Editor for The Daily Athenaeum, I oversee a team of writers and photographers, ensuring we capture the pulse of campus athletics. My time at Jomboy Media has sharpened my production skills, teaching me the nuances of digital engagement and viral content creation. Whether I'm behind the camera, in the editing suite, or writing a feature story, my goal remains the same: to tell stories that matter, in a way that people can't stop watching.
