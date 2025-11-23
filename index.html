@@ -431,50 +431,45 @@
         <div id="about" class="page-section hidden container mx-auto px-4 pb-20 max-w-7xl">
             
             <div class="glass-panel rounded-3xl p-8 md:p-12 shadow-lg animate-slide-up">
-                <div class="text-center mb-12">
+                <div class="text-center mb-10">
                     <h2 class="text-4xl md:text-5xl font-black text-brand-dark mb-4">Behind the Lens</h2>
                     <p class="text-xl text-slate-500 max-w-2xl mx-auto">More than just a producer. A storyteller, a sports enthusiast, and a creative mind constantly exploring new mediums.</p>
                 </div>
 
-                <!-- 4 Photos with Captions Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                    <!-- Photo 1 -->
-                    <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform rotate-1 hover:rotate-0 transition-transform duration-300 max-w-sm mx-auto pb-1">
-                        <div class="overflow-hidden rounded-xl mb-0.5 h-48 bg-slate-100">
-                            <img src="assets/about_photo_1.jpg" alt="On Set" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-handwriting text-slate-600 text-center text-sm italic leading-tight pb-0.5">I joined The Daily Athenaeum, WVU’s student newspaper, in 2023 during my first month on campus. At The DA, I serve as the sports managing editor, guiding The DA’s coverage of WVU Athletics, while writing on the WVU Football and Men’s Basketball beats. Before then, I served as the video editor, a photographer and a staff writer. Through The DA, I’ve earned opportunities to travel to postseason sporting events, such as the NCAA Division I Women’s Basketball Tournament in Chapel Hill, North Carolina (above) and the NCAA Division I Baseball Tournament in Baton Rouge, Louisiana (below). I share my work on X, and combine visual and print journalism to serve the campus community its sports news. 
-</p>
-                    </div>
-                     <!-- Photo 2 (9x16 Smaller) -->
-                     <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform -rotate-1 hover:rotate-0 transition-transform duration-300 w-1/2 mx-auto pb-1">
-                        <div class="overflow-hidden rounded-xl mb-0.5 aspect-[9/16] bg-slate-100">
-                            <img src="assets/about_photo_2.jpg" alt="Editing" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-handwriting text-slate-600 text-center text-sm italic leading-tight pb-0.5">In the summer of 2025, I joined Jomboy Media as a production intern for the Talkin’ Yanks podcast, where I create social media clips, montages and a weekly radio segment for WFAN sports radio.</p>
-                    </div>
-                     <!-- Photo 3 (9x16 Smaller) -->
-                     <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform rotate-1 hover:rotate-0 transition-transform duration-300 w-1/2 mx-auto pb-1">
-                        <div class="overflow-hidden rounded-xl mb-0.5 aspect-[9/16] bg-slate-100">
-                            <img src="assets/about_photo_3.jpg" alt="Interviewing" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-handwriting text-slate-600 text-center text-sm italic leading-tight pb-0.5">I covered WVU Baseball's postseason run to the Super Regionals, before it lost to the eventual national title winner, LSU.</p>
-                    </div>
-                     <!-- Photo 4 -->
-                     <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform -rotate-1 hover:rotate-0 transition-transform duration-300 max-w-sm mx-auto pb-1">
-                        <div class="overflow-hidden rounded-xl mb-0.5 h-48 bg-slate-100">
-                            <img src="assets/about_photo_4.jpg" alt="Travel" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-handwriting text-slate-600 text-center text-sm italic leading-tight pb-0.5">I'm fortunate enough to have a great team of writers to work with who improve our sports coverage daily.</p>
-                    </div>
-                </div>
-
-                <!-- General Summary -->
-                <div class="bg-brand-dark p-8 rounded-2xl text-white shadow-xl">
-                    <h3 class="text-2xl font-bold mb-4">About Bryce</h3>
-                    <p class="text-lg leading-relaxed opacity-90">
+                <!-- General Summary (Moved to Top) -->
+                <div class="bg-brand-dark p-6 rounded-2xl text-white shadow-xl max-w-4xl mx-auto mb-12">
+                    <h3 class="text-xl font-bold mb-2">About Bryce</h3>
+                    <p class="text-base leading-relaxed opacity-90">
                         I am currently a junior at West Virginia University, where my passion for sports and storytelling collide. As the Sports Managing Editor for The Daily Athenaeum, I oversee a team of writers and photographers, ensuring we capture the pulse of campus athletics. My time at Jomboy Media has sharpened my production skills, teaching me the nuances of digital engagement and viral content creation. Whether I'm behind the camera, in the editing suite, or writing a feature story, my goal remains the same: to tell stories that matter, in a way that people can't stop watching.
                     </p>
+                </div>
+
+                <!-- 4 Photos Grid (Mixed Aspect Ratios, No Text) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Photo 1 (Landscape) -->
+                    <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform rotate-1 hover:rotate-0 transition-transform duration-300 max-w-sm mx-auto">
+                        <div class="overflow-hidden rounded-xl h-48 bg-slate-100">
+                            <img src="assets/about_photo_1.jpg" alt="On Set" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                     <!-- Photo 2 (Vertical 9:16) -->
+                     <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform -rotate-1 hover:rotate-0 transition-transform duration-300 w-1/2 mx-auto">
+                        <div class="overflow-hidden rounded-xl aspect-[9/16] bg-slate-100">
+                            <img src="assets/about_photo_2.jpg" alt="Editing" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                     <!-- Photo 3 (Vertical 9:16) -->
+                     <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform rotate-1 hover:rotate-0 transition-transform duration-300 w-1/2 mx-auto">
+                        <div class="overflow-hidden rounded-xl aspect-[9/16] bg-slate-100">
+                            <img src="assets/about_photo_3.jpg" alt="Interviewing" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                     <!-- Photo 4 (Landscape) -->
+                     <div class="bg-white p-1.5 rounded-2xl shadow-md border border-slate-100 transform -rotate-1 hover:rotate-0 transition-transform duration-300 max-w-sm mx-auto">
+                        <div class="overflow-hidden rounded-xl h-48 bg-slate-100">
+                            <img src="assets/about_photo_4.jpg" alt="Travel" class="w-full h-full object-cover">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
