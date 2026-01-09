@@ -292,16 +292,36 @@
                 </h3>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <!-- TikTok 1 -->
-                    <div class="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all aspect-9-16 relative group bg-black">
-                        <iframe class="w-full h-full" src="https://www.tiktok.com/@talkinyanks_/video/7532577902374817054" data-video-id="7532577902374817054" allowfullscreen></iframe>
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none group-hover:bg-transparent transition-all">
-                            <i data-lucide="play" class="w-12 h-12 text-white opacity-90"></i>
-                        </div>
-                        <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-slate-900 text-xs font-bold">Banterin' with Boone</p>
-                        </div>
-                    </div>
+                    <!-- Card Container -->
+    <!-- Adjusted width to fit TikTok's native min-width (325px) -->
+    <div class="w-full max-w-[340px] rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all bg-white relative group">
+        
+        <!-- TikTok Embed Code -->
+        <div class="p-1"> <!-- Small padding to frame it nicely inside the border -->
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@talkinyanks_/video/7532577902374817054" data-video-id="7532577902374817054" style="max-width: 605px;min-width: 325px;" > 
+                <section> 
+                    <a target="_blank" title="@talkinyanks_" href="https://www.tiktok.com/@talkinyanks_?refer=embed">@talkinyanks_</a> 
+                    Even though he’s an Eagles fan, Aaron Boone “wanted to vomit” when he heard Eagles chants from Phillies fans at Yankee Stadium  
+                    <a title="yankees" target="_blank" href="https://www.tiktok.com/tag/yankees?refer=embed">#yankees</a> 
+                    <a title="phillies" target="_blank" href="https://www.tiktok.com/tag/phillies?refer=embed">#phillies</a> 
+                    <a title="eagles" target="_blank" href="https://www.tiktok.com/tag/eagles?refer=embed">#eagles</a> 
+                    <a title="newyork" target="_blank" href="https://www.tiktok.com/tag/newyork?refer=embed">#newyork</a> 
+                    <a title="philly" target="_blank" href="https://www.tiktok.com/tag/philly?refer=embed">#philly</a> 
+                    <a title="mlb" target="_blank" href="https://www.tiktok.com/tag/mlb?refer=embed">#mlb</a> 
+                    <a title="nfl" target="_blank" href="https://www.tiktok.com/tag/nfl?refer=embed">#nfl</a> 
+                    <a target="_blank" title="♬ original sound - Talkin’ Yanks" href="https://www.tiktok.com/music/original-sound-7532583061163150110?refer=embed">♬ original sound - Talkin’ Yanks</a> 
+                </section> 
+            </blockquote> 
+            <script async src="https://www.tiktok.com/embed.js"></script>
+        </div>
+
+        <!-- Label Section -->
+        <!-- Moved out of absolute positioning so it doesn't block the video controls -->
+        <div class="bg-slate-50 border-t border-slate-100 p-3 text-center">
+            <p class="text-slate-900 text-sm font-bold">Banterin' with Boone</p>
+        </div>
+
+    </div>
                     <!-- TikTok 2 -->
                     <div class="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all aspect-9-16 relative group bg-black">
                         <iframe class="w-full h-full" src="https://www.tiktok.com/embed/987654321" allowfullscreen></iframe>
