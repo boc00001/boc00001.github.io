@@ -64,7 +64,7 @@
         }
 
         .glass-nav {
-            background: rgba(255, 255, 255, 0.8); /* Light glass for nav */
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.6);
@@ -86,11 +86,14 @@
     </style>
     <!-- Lucide Icons -->
     <script type="module">
-        import { createIcons, Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
+        import { createIcons, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera, Radio } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
         
         // Initialize icons after DOM load
         window.addEventListener('DOMContentLoaded', () => {
-            createIcons({ icons: { Home, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera } });
+            createIcons({ icons: { User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera, Radio } });
+            
+            // Set initial state - Default to Experience since Home is gone
+            navigateTo('experience');
         });
         
         // Expose navigation function globally
@@ -103,8 +106,10 @@
             
             // Show target page
             const target = document.getElementById(pageId);
-            target.classList.remove('hidden');
-            target.classList.add('animate-fade-in');
+            if(target) {
+                target.classList.remove('hidden');
+                target.classList.add('animate-fade-in');
+            }
             
             // Update nav state
             document.querySelectorAll('.nav-link').forEach(el => {
@@ -128,16 +133,14 @@
     <!-- Sticky Navigation (Light Mode) -->
     <nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
-                <div class="w-8 h-8 bg-gradient-to-br from-brand-primary to-brand-accent rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-md">B</div>
-                <span class="text-xl font-bold text-brand-dark tracking-tight">Bryce<span class="text-brand-primary">Cohen</span></span>
+            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('experience')">
+                <!-- Removed B Logo as requested -->
+                <span class="text-xl font-bold text-brand-dark tracking-tight">Bryce <span class="text-brand-primary">Cohen</span></span>
             </div>
             
             <div class="hidden md:flex space-x-2">
-                <button id="nav-home" onclick="navigateTo('home')" class="nav-link px-4 py-2 rounded-lg text-brand-primary font-bold bg-blue-50 hover:bg-blue-100 transition-all flex items-center gap-2">
-                    <i data-lucide="home" class="w-4 h-4"></i> Home
-                </button>
-                <button id="nav-experience" onclick="navigateTo('experience')" class="nav-link px-4 py-2 rounded-lg text-slate-500 hover:text-brand-dark hover:bg-slate-50 transition-all flex items-center gap-2">
+                <!-- Removed Home Link -->
+                <button id="nav-experience" onclick="navigateTo('experience')" class="nav-link px-4 py-2 rounded-lg text-brand-primary font-bold bg-blue-50 hover:bg-blue-100 transition-all flex items-center gap-2">
                     <i data-lucide="briefcase" class="w-4 h-4"></i> Experience
                 </button>
                 <button id="nav-about" onclick="navigateTo('about')" class="nav-link px-4 py-2 rounded-lg text-slate-500 hover:text-brand-dark hover:bg-slate-50 transition-all flex items-center gap-2">
@@ -146,8 +149,8 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button class="md:hidden text-brand-dark" onclick="navigateTo('experience')">
-                <i data-lucide="briefcase" class="w-6 h-6"></i>
+            <button class="md:hidden text-brand-dark" onclick="navigateTo('about')">
+                <i data-lucide="user" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
@@ -155,36 +158,8 @@
     <!-- CONTENT CONTAINER -->
     <div class="pt-24 min-h-screen">
 
-        <!-- ================= HOME PAGE ================= -->
-        <div id="home" class="page-section container mx-auto px-4 flex flex-col items-center justify-center min-h-[85vh] text-center">
-            <div class="animate-slide-up relative z-10">
-                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-brand-primary border border-blue-200 text-sm font-bold mb-6">
-                    Bryce Cohen is a...
-                </span>
-                <h1 class="text-6xl md:text-8xl font-black text-brand-dark tracking-tighter mb-6 drop-shadow-sm">
-                    Journalist. <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent">Editor.</span> Creator.
-                </h1>
-                <p class="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-                    Welcome to the portfolio of Bryce Cohen. Explore the works of the writer, editor and video producer from his experience at Jomboy Media and The Daily Athenaeum. 
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="navigateTo('experience')" class="group relative px-8 py-4 bg-brand-dark text-white font-bold rounded-full text-lg shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all transform hover:-translate-y-1 overflow-hidden">
-                        <span class="relative z-10 flex items-center gap-2">Explore Work <i data-lucide="arrow-right" class="w-5 h-5"></i></span>
-                    </button>
-                    <button onclick="navigateTo('about')" class="px-8 py-4 bg-white text-brand-dark font-bold rounded-full text-lg border border-slate-200 hover:border-brand-primary hover:text-brand-primary shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1">
-                        Meet Bryce
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Soft Background Blobs (Light Mode) -->
-            <div class="absolute top-1/4 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse-slow"></div>
-            <div class="absolute bottom-1/4 right-10 w-64 h-64 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse-slow" style="animation-delay: 1s;"></div>
-        </div>
-
-        <!-- ================= EXPERIENCE PAGE ================= -->
-        <div id="experience" class="page-section hidden container mx-auto px-4 pb-20 max-w-7xl">
+        <!-- ================= EXPERIENCE PAGE (Default) ================= -->
+        <div id="experience" class="page-section container mx-auto px-4 pb-20 max-w-7xl">
             
             <!-- Header Area: Resume & Links -->
             <div class="glass-panel rounded-3xl p-8 mb-12 shadow-sm animate-slide-up flex flex-col md:flex-row justify-between items-center gap-6">
@@ -193,9 +168,7 @@
                     <p class="text-slate-500 font-medium">Curated works from The Daily Athenaeum and Jomboy Media.</p>
                 </div>
                 <div class="flex flex-wrap gap-4">
-                    <a href="/assets/my_resume.pdf" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-brand-dark text-white rounded-xl font-semibold hover:bg-slate-800 transition-all hover:scale-105 shadow-md">
-                        <i data-lucide="file-text" class="w-5 h-5"></i> Download Resume
-                    </a>
+                    <!-- Removed Resume Button as requested -->
                     <a href="https://linkedin.com/in/bryce-cohen1" target="_blank" class="flex items-center gap-2 px-6 py-3 bg-[#0077b5] text-white rounded-xl font-semibold hover:bg-[#006396] transition-all hover:scale-105 shadow-md">
                         <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
                     </a>
@@ -221,8 +194,8 @@
                             <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </a>
-                     <!-- Article Card 2 -->
-                     <a href="https://www.thedaonline.com/news/university/wvup-all-night-sees-decrease-in-attendance-increase-in-cost/article_f1e7048c-1dad-4580-a636-6afae1c5ffdb.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                    <!-- Article Card 2 -->
+                    <a href="https://www.thedaonline.com/news/university/wvup-all-night-sees-decrease-in-attendance-increase-in-cost/article_f1e7048c-1dad-4580-a636-6afae1c5ffdb.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
                         <div class="h-48 overflow-hidden bg-slate-100">
                             <img src="/assets/story_photo_2.jpg" alt="Article 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400?text=Article+Image'">
                         </div>
@@ -233,8 +206,8 @@
                             <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </a>
-                     <!-- Article Card 3 -->
-                     <a href="https://www.thedaonline.com/sports/womens_basketball/i-stopped-drinking-red-bulls/article_1fcf5e7b-4cd0-4ee5-9128-cd4f30717f88.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                    <!-- Article Card 3 -->
+                    <a href="https://www.thedaonline.com/sports/womens_basketball/i-stopped-drinking-red-bulls/article_1fcf5e7b-4cd0-4ee5-9128-cd4f30717f88.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
                         <div class="h-48 overflow-hidden bg-slate-100">
                             <img src="/assets/story_photo_3.jpg" alt="Article 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400?text=Article+Image'">
                         </div>
@@ -245,8 +218,8 @@
                             <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </a>
-                     <!-- Article Card 4 -->
-                     <a href="https://www.thedaonline.com/sports/football/opinion-dear-wvu-fans-give-the-football-team-some-time/article_c62eaf8a-2f70-49fd-88d7-32e3933cf2ee.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                    <!-- Article Card 4 -->
+                    <a href="https://www.thedaonline.com/sports/football/opinion-dear-wvu-fans-give-the-football-team-some-time/article_c62eaf8a-2f70-49fd-88d7-32e3933cf2ee.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
                         <div class="h-48 overflow-hidden bg-slate-100">
                             <img src="/assets/story_photo_4.jpg" alt="Article 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400?text=Article+Image'">
                         </div>
@@ -257,8 +230,8 @@
                             <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </a>
-                     <!-- Article Card 5 -->
-                     <a href="https://www.thedaonline.com/sports/football/wvu-football-falls-short-against-tcu-drops-5th-straight-game/article_7f8c084e-9029-42cc-8638-7606b8d7be21.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                    <!-- Article Card 5 -->
+                    <a href="https://www.thedaonline.com/sports/football/wvu-football-falls-short-against-tcu-drops-5th-straight-game/article_7f8c084e-9029-42cc-8638-7606b8d7be21.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
                         <div class="h-48 overflow-hidden bg-slate-100">
                             <img src="/assets/story_photo_5.jpg" alt="Article 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400?text=Article+Image'">
                         </div>
@@ -269,8 +242,8 @@
                             <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </a>
-                     <!-- Article Card 6 -->
-                     <a href="https://www.thedaonline.com/sports/wvu-athletics-sells-naming-rights-to-coliseum-to-hope-gas/article_844e82f2-5a4a-4d53-a95b-02add82352e1.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                    <!-- Article Card 6 -->
+                    <a href="https://www.thedaonline.com/sports/wvu-athletics-sells-naming-rights-to-coliseum-to-hope-gas/article_844e82f2-5a4a-4d53-a95b-02add82352e1.html" target="_blank" class="group relative block overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
                         <div class="h-48 overflow-hidden bg-slate-100">
                             <img src="/assets/story_photo_6.jpg" alt="Article 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400?text=Article+Image'">
                         </div>
@@ -288,67 +261,59 @@
             <div class="mb-16 animate-slide-up" style="animation-delay: 0.2s;">
                 <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
                     <span class="bg-gradient-to-r from-rose-400 to-orange-400 p-2 rounded-lg"><i data-lucide="play" class="w-6 h-6 text-white"></i></span>
-                    Viral & Short Form Content
+                    Jomboy Media short-form content
                 </h3>
                 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <!-- Card Container -->
-    <!-- Adjusted width to fit TikTok's native min-width (325px) -->
-    <div class="w-full max-w-[340px] rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all bg-white relative group">
-        
-    <!-- TikTok 1 -->
-                    <div class="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all aspect-9-16 relative group bg-black">
-                        <iframe class="w-full h-full" src="https://www.tiktok.com/@talkinyanks_/video/7532577902374817054" data-video-id="7532577902374817054" allowfullscreen></iframe>
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none group-hover:bg-transparent transition-all">
-                            <i data-lucide="play" class="w-12 h-12 text-white opacity-90"></i>
+                <!-- 2 Rows of 3 Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                    
+                    <!-- 1. TikTok (Linked Card because TikTok embeds often block external frames) -->
+                    <a href="https://www.tiktok.com/t/ZTr7xTHSP/" target="_blank" class="block group relative w-full aspect-9-16 bg-black rounded-2xl overflow-hidden border-2 border-slate-200 hover:border-brand-primary transition-all shadow-md hover:shadow-xl">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-white p-4 text-center">
+                            <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                            </div>
+                            <span class="font-bold text-lg">Watch on TikTok</span>
+                            <p class="text-xs text-slate-300 mt-2">Click to view clip</p>
                         </div>
-                        <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-slate-900 text-xs font-bold">Banterin' with Boone</p>
-                        </div>
+                        <!-- Decorative background -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#00f2ea] to-[#ff0050] opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                    </a>
+
+                    <!-- 2. IG Reel -->
+                    <div class="w-full aspect-9-16 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md bg-black">
+                        <iframe class="w-full h-full" src="https://www.instagram.com/reel/DMbJAsryLRP/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                     </div>
-                    <!-- TikTok 2 -->
-                    <div class="rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md hover:shadow-xl hover:border-brand-primary transition-all aspect-9-16 relative group bg-black">
-                        <iframe class="w-full h-full" src="https://www.tiktok.com/embed/987654321" allowfullscreen></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-slate-900 text-xs font-bold">TikTok Analysis</p>
-                        </div>
+
+                    <!-- 3. IG Reel -->
+                    <div class="w-full aspect-9-16 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md bg-black">
+                        <iframe class="w-full h-full" src="https://www.instagram.com/reel/DO6WsGRjarU/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                     </div>
-                    <!-- Reel 1 -->
-                    <div class="rounded-2xl overflow-hidden border-2 border-pink-200 shadow-md hover:shadow-xl hover:border-brand-accent transition-all aspect-9-16 relative group bg-black">
-                        <iframe class="w-full h-full" src="https://www.instagram.com/reel/123/embed" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-slate-900 text-xs font-bold">IG Reel Highlight</p>
-                        </div>
+
+                    <!-- 4. IG Reel -->
+                    <div class="w-full aspect-9-16 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md bg-black">
+                        <iframe class="w-full h-full" src="https://www.instagram.com/reel/DL3GZNuSi6Y/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                     </div>
-                     <!-- Reel 2 -->
-                     <div class="rounded-2xl overflow-hidden border-2 border-pink-200 shadow-md hover:shadow-xl hover:border-brand-accent transition-all aspect-9-16 relative group bg-black">
-                        <iframe class="w-full h-full" src="https://www.instagram.com/reel/456/embed" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-slate-900 text-xs font-bold">IG Reel BTS</p>
-                        </div>
+
+                    <!-- 5. YT Short (Converted to embed format) -->
+                    <div class="w-full aspect-9-16 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md bg-black">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/0NQMdYyuPiI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
-                    <!-- YT Short 1 -->
-                    <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md hover:shadow-xl hover:border-red-500 transition-all aspect-9-16 relative group bg-black">
-                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/shorts_id_1" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-slate-900 text-xs font-bold">YT Short Clip</p>
-                        </div>
+
+                    <!-- 6. YT Short (Converted to embed format) -->
+                    <div class="w-full aspect-9-16 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md bg-black">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/J7v-ODn19bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
-                     <!-- YT Short 2 -->
-                     <div class="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md hover:shadow-xl hover:border-red-500 transition-all aspect-9-16 relative group bg-black">
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/shorts_id_2" frameborder="0"></iframe>
-                         <div class="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-md rounded-lg p-2 text-center">
-                            <p class="text-slate-900 text-xs font-bold">YT Short Edit</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
             <!-- SECTION 3: The X (Twitter) Feed -->
-          <div class="mb-16 animate-slide-up" style="animation-delay: 0.3s;">
+            <div class="mb-16 animate-slide-up" style="animation-delay: 0.3s;">
                 <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
-                    <span class="bg-black p-2 rounded-lg"><i data-lucide="twitter" class="w-6 h-6 text-white"></i></span>
-                    Real-time Updates (X/Twitter)
+                    <!-- Changed Icon to Radio/Signal as requested -->
+                    <span class="bg-black p-2 rounded-lg"><i data-lucide="radio" class="w-6 h-6 text-white"></i></span>
+                    Multi-media reporting
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -379,7 +344,6 @@
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </div> 
-        <!-- THIS WAS THE MISSING TAG! It closes the #experience div -->
 
         <!-- ================= ABOUT PAGE ================= -->
         <div id="about" class="page-section hidden container mx-auto px-4 pb-20 max-w-7xl">
@@ -387,27 +351,27 @@
             <div class="glass-panel rounded-3xl p-8 md:p-12 shadow-lg animate-slide-up">
                 <div class="text-center mb-10">
                     <h2 class="text-4xl md:text-5xl font-black text-brand-dark mb-4">Who is Bryce Cohen?</h2>
-                    <p class="text-xl text-slate-500 max-w-2xl mx-auto">More than just a journalist. A hustler, sports enthusiast and solution finder.</p>
+                    <p class="text-xl text-slate-500 max-w-2xl mx-auto">Multi-media journalist, writer, content producer and leader</p>
                 </div>
 
                 <div class="bg-brand-dark p-6 rounded-2xl text-white shadow-xl max-w-4xl mx-auto mb-12">
                     <h3 class="text-xl font-bold mb-2">About Bryce Cohen</h3>
                     <p class="text-base leading-relaxed opacity-90">
-                        I joined The Daily Athenaeum, WVU’s student newspaper, in 2023 during my first month on campus. At The DA, I serve as the sports managing editor, guiding The DA’s coverage of WVU Athletics, while writing on the WVU Football and Men’s Basketball beats. Before then, I served as the video editor, a photographer and a staff writer. Through The DA, I’ve earned opportunities to travel to postseason sporting events, such as the NCAA Division I Women’s Basketball Tournament in Chapel Hill, North Carolina and the NCAA Division I Baseball Tournament in Baton Rouge, Louisiana. I share my work on X, and combine visual and print journalism to serve the campus community its sports news.  In the summer of 2025, I joined Jomboy Media as a production intern for the Talkin’ Yanks podcast, where I create social media clips, montages and a weekly radio segment for WFAN sports radio. 
+                        Bryce Cohen is a junior sports media student at West Virginia University. He serves as the executive sports editor for WVU’s campus newspaper, The Daily Athenaeum. Cohen is a reporter for WVU’s football and men’s basketball teams, covering both teams on-site at home games. He manages a staff of assistant sports editors, beat writers and staff writers. He oversees all content that is distributed from The DA’s sports section and has written over 400 articles. Over the past three years, he has worked as a staff writer for news, culture and sports, video editor, photographer and sports managing editor. Last summer, he joined Jomboy Media as a production intern. He produced short-form podcast clips for popular New York Yankees podcast, Talkin’ Yanks, including clips from its weekly interview series with Yankee manager Aaron Boone. In the fall, he was tasked with producing a weekly radio spot for WFAN sports radio, stitching together different Jomboy Media podcasts for Jomboy Media Rewind, a show that followed a strategic partnership between the two New York sports media powers.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="overflow-hidden rounded-xl shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300 aspect-video">
+                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 aspect-video">
                         <img src="assets/about_photo_1.jpg" alt="On Set" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400?text=Photo+1'">
                     </div>
-                     <div class="overflow-hidden rounded-xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300 aspect-video">
+                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 aspect-video">
                         <img src="assets/about_photo_4.jpg" alt="Editing" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400?text=Photo+2'">
                     </div>
-                     <div class="overflow-hidden rounded-xl shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300 aspect-[9/16] w-2/3 mx-auto">
+                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 aspect-[9/16] w-2/3 mx-auto">
                         <img src="assets/about_photo_2.JPG" alt="Interviewing" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x600?text=Photo+3'">
                     </div>
-                     <div class="overflow-hidden rounded-xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300 aspect-[9/16] w-2/3 mx-auto">
+                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 aspect-[9/16] w-2/3 mx-auto">
                         <img src="assets/about_photo_3.JPG" alt="Travel" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x600?text=Photo+4'">
                     </div> 
                 </div> 
