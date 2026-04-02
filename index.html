@@ -119,8 +119,11 @@
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass-nav shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('experience')">
-                <span class="text-xl font-bold text-brand-dark tracking-tight">Bryce <span class="text-brand-primary">Cohen</span></span>
+            <!-- LOGO: CHANGED TO CAMERA ICON -->
+            <div class="flex items-center gap-2 cursor-pointer group" onclick="navigateTo('experience')">
+                <div class="bg-brand-primary p-2 rounded-lg text-white group-hover:bg-brand-accent transition-colors shadow-sm">
+                    <i data-lucide="camera" class="w-6 h-6"></i>
+                </div>
             </div>
             
             <div class="hidden md:flex space-x-2">
