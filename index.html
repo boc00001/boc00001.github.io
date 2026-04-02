@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bryce Cohen | Portfolio</title>
     
-    <!-- FAVICON -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>">
+    <!-- FAVICON (Restored to Headshot) -->
+    <link rel="icon" type="image/jpg" href="assets/about_photo_2.JPG">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -65,35 +65,53 @@
     </style>
 
     <!-- Lucide Icons -->
-    <script type="module">
-        import { createIcons, User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera, Radio } from 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/esm/lucide.js';
-        
-        const icons = { User, Briefcase, FileText, Linkedin, Instagram, Youtube, Twitter, Play, ArrowRight, ExternalLink, Camera, Radio };
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        // Global Navigation Function
+        function navigateTo(pageId) {
+            // 1. Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('animate-fade-in');
+            });
 
-        window.navigateTo = (pageId) => {
-            document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
+            // 2. Show the target section
             const target = document.getElementById(pageId);
-            if(target) {
+            if (target) {
                 target.classList.remove('hidden');
                 target.classList.add('animate-fade-in');
             }
+
+            // 3. Update nav link styles
             document.querySelectorAll('.nav-link').forEach(el => {
                 el.classList.remove('text-brand-primary', 'font-bold', 'bg-blue-50');
                 el.classList.add('text-slate-500');
             });
+
+            // 4. Highlight the active nav button
             const activeNav = document.getElementById(`nav-${pageId}`);
-            if(activeNav) {
+            if (activeNav) {
                 activeNav.classList.add('text-brand-primary', 'font-bold', 'bg-blue-50');
                 activeNav.classList.remove('text-slate-500');
             }
-            window.scrollTo(0,0);
-            createIcons({ icons });
-        };
 
-        window.addEventListener('DOMContentLoaded', () => {
-            createIcons({ icons });
-            window.navigateTo('experience');
-        });
+            // 5. Scroll to top
+            window.scrollTo(0, 0);
+
+            // 6. Refresh icons (needed for dynamically shown content)
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            lucide.createIcons();
+            // Start on Experience page
+            navigateTo('experience');
+        };
     </script>
 </head>
 <body class="selection:bg-brand-primary selection:text-white">
@@ -106,14 +124,15 @@
             </div>
             
             <div class="hidden md:flex space-x-2">
-                <button id="nav-experience" onclick="navigateTo('experience')" class="nav-link px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                <button id="nav-experience" onclick="navigateTo('experience')" class="nav-link px-4 py-2 rounded-lg transition-all flex items-center gap-2 text-slate-500">
                     <i data-lucide="briefcase" class="w-4 h-4"></i> Experience
                 </button>
-                <button id="nav-about" onclick="navigateTo('about')" class="nav-link px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                <button id="nav-about" onclick="navigateTo('about')" class="nav-link px-4 py-2 rounded-lg transition-all flex items-center gap-2 text-slate-500">
                     <i data-lucide="user" class="w-4 h-4"></i> About Me
                 </button>
             </div>
 
+            <!-- Mobile User Button -->
             <button class="md:hidden text-brand-dark" onclick="navigateTo('about')">
                 <i data-lucide="user" class="w-6 h-6"></i>
             </button>
@@ -137,7 +156,7 @@
                 </div>
             </div>
 
-            <!-- SECTION 1: Featured Journalism (6 Articles) -->
+            <!-- SECTION 1: Featured Journalism -->
             <div class="mb-16 animate-slide-up" style="animation-delay: 0.1s;">
                 <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
                     <span class="bg-blue-100 p-2 rounded-lg"><i data-lucide="file-text" class="w-6 h-6 text-brand-primary"></i></span>
@@ -188,7 +207,7 @@
                         <div class="p-6">
                             <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Opinion</span>
                             <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">Dear WVU fans, give the football team some time</h4>
-                            <p class="text-slate-500 text-sm mb-4">An opinion article that shared my perspective on a tumultuous football season in a letter to a tortured fanbase.</p>
+                            <p class="text-slate-500 text-sm mb-4">An opinion article that shared my perspective on a tumultuous football season.</p>
                             <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </a>
@@ -212,18 +231,18 @@
                         <div class="p-6">
                             <span class="text-xs font-bold text-brand-accent uppercase tracking-wider">Breaking News</span>
                             <h4 class="text-xl font-bold text-brand-dark mt-2 mb-3 leading-tight group-hover:text-brand-primary transition-colors">WVU Athletics sells naming rights to Coliseum</h4>
-                            <p class="text-slate-500 text-sm mb-4">Breaking news coverage of a major announcement on the business side of WVU Athletics.</p>
+                            <p class="text-slate-500 text-sm mb-4">Breaking news coverage of a major announcement at WVU Athletics.</p>
                             <span class="text-sm font-semibold text-slate-400 group-hover:text-brand-accent flex items-center gap-1 transition-colors">Read Article <i data-lucide="external-link" class="w-4 h-4"></i></span>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- SECTION 2: Short Form Video Content (6 Videos) -->
+            <!-- SECTION 2: Short Form Video Content -->
             <div class="mb-16 animate-slide-up" style="animation-delay: 0.2s;">
                 <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
                     <span class="bg-gradient-to-r from-rose-400 to-orange-400 p-2 rounded-lg"><i data-lucide="play" class="w-6 h-6 text-white"></i></span>
-                    Jomboy Media short-form content
+                    Jomboy Media content
                 </h3>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                     <div class="w-full aspect-9-16 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-md bg-black">
@@ -247,24 +266,24 @@
                 </div>
             </div>
 
-            <!-- SECTION 3: Multi-media reporting (6 Tweets) -->
+            <!-- SECTION 3: Social/Multimedia Reporting -->
             <div class="mb-16 animate-slide-up" style="animation-delay: 0.3s;">
                 <h3 class="text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
                     <span class="bg-black p-2 rounded-lg"><i data-lucide="radio" class="w-6 h-6 text-white"></i></span>
-                    Multi-media reporting
+                    Multimedia Reporting
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 p-4">
                         <blockquote class="twitter-tweet"><p lang="en" dir="ltr">WVU Football Head Coach Rich Rodriguez with an emotional Country Roads after taking down Pitt 31-24. <a href="https://t.co/70Y4Sh6xg1">pic.twitter.com/70Y4Sh6xg1</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1967014288448504200?ref_src=twsrc%5Etfw">Sept 13, 2025</a></blockquote>
                     </div>
                     <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 p-4">
-                        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">BREAKING: WVU Women&#39;s Soccer will HOST an NCAA Tournament regional and play Wagner in the first round. <a href="https://t.co/6bwLvPfMhP">pic.twitter.com/6bwLvPfMhP</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1987995652375126159?ref_src=twsrc%5Etfw">Nov 10, 2025</a></blockquote>
+                        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">BREAKING: WVU Women&#39;s Soccer will HOST an NCAA Tournament regional... <a href="https://t.co/6bwLvPfMhP">pic.twitter.com/6bwLvPfMhP</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1987995652375126159?ref_src=twsrc%5Etfw">Nov 10, 2025</a></blockquote>
                     </div>
                     <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 p-4">
-                        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">First Country Roads for Ross Hodge and company... 80-54 is your final score. <a href="https://t.co/9JBSbyhTNk">pic.twitter.com/9JBSbyhTNk</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1982568925847339043?ref_src=twsrc%5Etfw">Oct 26, 2025</a></blockquote>
+                        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">First Country Roads for Ross Hodge... <a href="https://t.co/9JBSbyhTNk">pic.twitter.com/9JBSbyhTNk</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1982568925847339043?ref_src=twsrc%5Etfw">Oct 26, 2025</a></blockquote>
                     </div>
                     <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 p-4">
-                        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">FINAL: WVU Women&#39;s Basketball secures an improbable, 57-49 win over No. 15 Duke. <a href="https://t.co/eR9djZdCmE">pic.twitter.com/eR9djZdCmE</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1989519643099472230?ref_src=twsrc%5Etfw">Nov 15, 2025</a></blockquote>
+                        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">FINAL: WVU Women&#39;s Basketball secures an improbable win... <a href="https://t.co/eR9djZdCmE">pic.twitter.com/eR9djZdCmE</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1989519643099472230?ref_src=twsrc%5Etfw">Nov 15, 2025</a></blockquote>
                     </div>
                     <div class="bg-white rounded-xl overflow-hidden shadow-md border border-slate-100 p-4">
                         <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Fresh paint at the Hope Coliseum <a href="https://t.co/KxFF3HNN33">pic.twitter.com/KxFF3HNN33</a></p>&mdash; Bryce Cohen (@bryceocohen) <a href="https://twitter.com/bryceocohen/status/1971642609191079970?ref_src=twsrc%5Etfw">Sept 26, 2025</a></blockquote>
@@ -290,17 +309,18 @@
                         Bryce Cohen is a junior sports media student at West Virginia University. He serves as the executive sports editor for WVU’s campus newspaper, The Daily Athenaeum. Cohen is a reporter for WVU’s football and men’s basketball teams and has covered all 18 Division I sports offered at WVU. He manages a staff of assistant sports editors, beat writers and staff writers. He oversees all content that is distributed from The DA’s sports section and has written over 350 articles, created weekly assignment budgets and provided event coverage. Over the past three years, he has worked as a staff writer for news, culture and sports, video editor, photographer and sports managing editor. Last summer, he joined Jomboy Media as a production intern. He produced short-form podcast clips for popular New York Yankees podcast, Talkin’ Yanks, including clips from its weekly interview series with Yankee manager Aaron Boone. In the fall, he was tasked with producing a weekly radio spot for WFAN sports radio, stitching together different Jomboy Media podcasts for Jomboy Media Rewind, a show that followed a strategic partnership between the two New York sports media powers.
                     </p>
                 </div>
+                <!-- About Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all aspect-video">
+                    <div class="overflow-hidden rounded-xl shadow-lg aspect-video">
                         <img src="assets/about_photo_1.jpg" alt="On Set" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400?text=Photo+1'">
                     </div>
-                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all aspect-video">
+                    <div class="overflow-hidden rounded-xl shadow-lg aspect-video">
                         <img src="assets/about_photo_4.jpg" alt="Editing" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400?text=Photo+2'">
                     </div>
-                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all aspect-[9/16] w-2/3 mx-auto">
-                        <img src="assets/about_photo_2.JPG" alt="Interviewing" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x600?text=Photo+3'">
+                    <div class="overflow-hidden rounded-xl shadow-lg aspect-[9/16] w-2/3 mx-auto">
+                        <img src="assets/about_photo_2.JPG" alt="Headshot" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x600?text=Photo+3'">
                     </div>
-                    <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-all aspect-[9/16] w-2/3 mx-auto">
+                    <div class="overflow-hidden rounded-xl shadow-lg aspect-[9/16] w-2/3 mx-auto">
                         <img src="assets/about_photo_3.JPG" alt="Travel" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x600?text=Photo+4'">
                     </div> 
                 </div> 
